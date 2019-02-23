@@ -7,37 +7,49 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="right"
-        android:layout_margin="20dp">
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp">
 
-        <TextView
+        <ImageButton
+            android:id="@+id/site_logo"
+            android:src="@drawable/ic_site_logo"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Istituto Superiore 'E. Fermi'"
-            android:textSize="20dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Strada Spolverina, 5 Mantova"
-            android:textSize="15dp"
-            android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Istituto Superiore 'E. Fermi'"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tel: 0376262675"
-            android:textSize="15dp"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Strada Spolverina, 5 Mantova"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tel: 0376262675"
+                android:textSize="15dp" />
+        </LinearLayout>
     </LinearLayout>
 
 
