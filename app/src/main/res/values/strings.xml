@@ -22,4 +22,6 @@
 
     <!-- Example settings for Notifications -->
 
+    <!-- User defined Strings -->
+    <string name="school_name">Istituto Superiore 'E. Fermi'</string>
 </resources>

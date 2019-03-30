@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp">
 
         <ImageButton
@@ -19,6 +19,7 @@
             android:src="@drawable/ic_site_logo"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
@@ -27,30 +28,67 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:layout_marginLeft="15dp">
+            android:layout_marginStart="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Istituto Superiore 'E. Fermi'"
-                android:textSize="20dp" />
+                android:text="@string/school_name"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Strada Spolverina, 5 Mantova"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/contact_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Tel: 0376262675"
-                android:textSize="15dp" />
+                android:text="Tel: 0376 262675"
+                android:textSize="15sp"
+                android:onClick="openDialer"/>
         </LinearLayout>
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/msg_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Benvenuto"
+                android:textSize="25sp"
+                />
+
+            <TextView
+                android:id="@+id/msg_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="-15dp"
+                android:text="Utente"
+                android:textSize="30sp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
