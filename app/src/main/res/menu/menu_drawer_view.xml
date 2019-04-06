@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menu_group_content"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_news"
+            android:title="@string/menu_news" />
+        <item
+            android:id="@+id/menu_student_zone"
+            android:title="@string/menu_student_zone" />
+        <item
+            android:id="@+id/menu_calendar"
+            android:title="@string/menu_calendar" />
+        <item
+            android:id="@+id/menu_timetable"
+            android:title="@string/menu_timetable" />
+        <item
+            android:id="@+id/menu_school_calendar"
+            android:title="@string/menu_school_calendar" />
+    </group>
+
+    <group
+        android:id="@+id/menu_group_apps"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_moodle"
+            android:title="@string/menu_moodle" />
+        <item
+            android:id="@+id/menu_register"
+            android:title="@string/menu_register" />
+    </group>
+
+    <group
+        android:id="@+id/menu_group_settings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_settings"
+            android:title="@string/menu_settings" />
+        <item
+            android:id="@+id/menu_logout"
+            android:title="@string/menu_logout" />
+    </group>
+
+</menu>
