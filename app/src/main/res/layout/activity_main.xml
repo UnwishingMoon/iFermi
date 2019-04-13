@@ -47,20 +47,22 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/school_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/school_address"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:onClick="openIntent"/>
 
                 <TextView
-                    android:id="@+id/contact_phone"
+                    android:id="@+id/school_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/school_phone"
                     android:textSize="15sp"
-                    android:onClick="openDialer"/>
+                    android:onClick="openIntent"/>
             </LinearLayout>
         </LinearLayout>
 
