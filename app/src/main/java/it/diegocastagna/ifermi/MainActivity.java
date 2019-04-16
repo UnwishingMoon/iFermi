@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
         /*TextView txt_view = (TextView) findViewById(R.id.msg_user);
         txt_view.setText(user_name); // Set the Welcome user message to the user_name
         txt_view.setVisibility(View.VISIBLE); // Set it Visible*/
+        // weiufgwi
     }
 
     public void openGeoIntent(View v){
