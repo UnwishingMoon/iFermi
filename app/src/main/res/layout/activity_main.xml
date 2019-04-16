@@ -53,7 +53,7 @@
                     android:layout_gravity="center"
                     android:text="@string/school_address"
                     android:textSize="15sp"
-                    android:onClick="openIntent"/>
+                    android:onClick="openGeoIntent"/>
 
                 <TextView
                     android:id="@+id/school_phone"
@@ -62,7 +62,8 @@
                     android:layout_gravity="center"
                     android:text="@string/school_phone"
                     android:textSize="15sp"
-                    android:onClick="openIntent"/>
+                    android:autoLink="phone"
+                    android:linksClickable="true"/>
             </LinearLayout>
         </LinearLayout>
 
