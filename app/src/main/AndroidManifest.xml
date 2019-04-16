@@ -18,14 +18,6 @@
         <activity android:name=".OrarioActivity" />
         <activity android:name=".AgendaActivity" />
         <activity android:name=".StudentActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.diegocastagna.ifermi.MainActivity" />
-        </activity>
         <activity android:name=".TutorialActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
