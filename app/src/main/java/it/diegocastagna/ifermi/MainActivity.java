@@ -8,21 +8,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import java.util.Observable;
+import java.util.Observer;
+
+public class MainActivity extends Activity implements Observer {
+    private Model mModel;
     private DrawerLayout drawerLayout; // Drawer of the Entire Activity
-    private String schoolPhone = "+39 0376 262675";
+    private TextView msgWelcome; // welcome user message that
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.drawerLayout = findViewById(R.id.drawer_layout); // Create the Drawer Layour for the Menu and the main content
+        this.mModel = Model.getInstance();
+        this.mModel.addObserver(this);
 
-        // TODO Retrieve user name from Files(?)
-        /*TextView txt_view = (TextView) findViewById(R.id.msg_user);
-        txt_view.setText(user_name); // Set the Welcome user message to the user_name
-        txt_view.setVisibility(View.VISIBLE); // Set it Visible*/
+        this.drawerLayout = findViewById(R.id.drawer_layout); // Create the Drawer Layour for the Menu and the main content
+        this.msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
     }
 
     public void openGeoIntent(View v){
@@ -39,5 +42,10 @@ public class MainActivity extends Activity {
 
             }
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

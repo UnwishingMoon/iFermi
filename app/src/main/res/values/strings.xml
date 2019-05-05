@@ -15,12 +15,14 @@
     <string name="school_name">Istituto Superiore \'E. Fermi\'</string>
     <string name="school_address">Strada Spolverina, 5 Mantova</string>
     <string name="school_phone">Tel: +39 0376 262675</string>
+
     <string name="msg_welcome">Benvenuto</string>
+
     <string name="menu_news">News</string>
     <string name="menu_student_zone">Area Studenti</string>
     <string name="menu_calendar">Calendario Giornaliero</string>
     <string name="menu_timetable">Orario</string>
-    <string name="menu_school_calendar">Calendario Scolastico</string>
+    <string name="menu_school_calendar">Calendario Scolastico Annuale</string>
     <string name="menu_moodle">Moodle</string>
     <string name="menu_register">Registro Elettronico</string>
     <string name="menu_settings">Impostazioni</string>
