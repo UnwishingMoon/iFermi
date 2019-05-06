@@ -8,7 +8,7 @@ import java.net.SocketAddress;
 
 public class WebsiteCheck extends AsyncTask {
     @Override
-    protected Object doInBackground(Object[] objects) {
+    protected Boolean doInBackground(Object[] objects) {
         try{
             int timeout = 1500; // Timeout in Milliseconds
 
