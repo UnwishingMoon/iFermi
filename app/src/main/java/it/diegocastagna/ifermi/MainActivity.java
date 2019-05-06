@@ -22,6 +22,7 @@ public class MainActivity extends Activity implements Observer {
         setContentView(R.layout.activity_main);
 
         this.mModel = Model.getInstance();
+        this.mModel.setCacheDir(getCacheDir());
         this.mModel.addObserver(this);
 
         this.drawerLayout = findViewById(R.id.drawer_layout); // Create the Drawer Layour for the Menu and the main content

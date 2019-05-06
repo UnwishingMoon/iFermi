@@ -22,17 +22,15 @@ public class Model extends Observable {
     public final static String rssUrl = "https://www.fermimn.edu.it/?action=rss";
     public final static String classesUrl = "https://www.fermimn.edu.it/orari/orario_in_corso/";
 
-    private WebsiteCheck wCheck;
-
-    private String newsCacheFile = "newsCacheFile.rss";
     private List rssNews;
 
-    private String classesCacheFile = "classesCacheFile.html";
+    private final String classesCacheFile = "classesCacheFile.html";
     private List classesList;
-
     private String schoolClass;
 
     private static Model instance;
+    private WebsiteCheck wCheck;
+    private File cacheDir;
 
     public static Model getInstance(){
         if(instance == null){
@@ -42,7 +40,7 @@ public class Model extends Observable {
     }
 
     private Model(){
-        this.rssNews = new ArrayList();
+        this.rssNews = new ArrayList<>();
 
         this.classesList = new ArrayList();
         this.schoolClass = "1A";
@@ -50,6 +48,10 @@ public class Model extends Observable {
         this.wCheck = new WebsiteCheck();
     }
 
+    public void setCacheDir(File cacheDir) {
+        this.cacheDir = cacheDir;
+        //ttewsdihbfkewjhbrnf
+    }
 
     public List getNewsList(){
         // Check if Classes List exists
@@ -58,9 +60,14 @@ public class Model extends Observable {
         }
 
         // Checking if Cache file Exists and is not empty
-        File f = new File(newsCacheFile);
+        File f = new File(this.cacheDir, "newsCacheFile.rss");
         if(f.exists()){
             try{
+                File f2 = new File(this.cacheDir, "newsCacheFileTemp.rss");
+                downloadFile(f2, rssUrl);
+                // Checking if files are the same
+
+                // If they are different file, it deletes the old one and replace it with the new one
                 createRssNews(f);
                 return rssNews;
             }catch (Exception e){
