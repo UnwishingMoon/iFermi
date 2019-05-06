@@ -50,7 +50,6 @@ public class Model extends Observable {
 
     public void setCacheDir(File cacheDir) {
         this.cacheDir = cacheDir;
-        //ttewsdihbfkewjhbrnf
     }
 
     public List getNewsList(){
