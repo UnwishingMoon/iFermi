@@ -80,7 +80,7 @@ public class Model extends Observable {
             // Retrieve the file from the website
             if(isInternetActive) {
                 try {
-                    downloadFile(f, this.rssUrl);
+                    downloadFile(f, rssUrl);
                     createRssNews(f);
                 } catch (Exception e) {
                     // Log the error
@@ -119,10 +119,13 @@ public class Model extends Observable {
         bis.close();
     }
 
-    public void getClassesList(){
-        // Checking if Cache file Exists and is not empty
+    public List getClassesList(){
+        // Check if Classes List exists
         if(this.classesList != null){
-            this.wCheck.execute();
+            return classesList;
         }
+
+        // Checking if Cache file Exists and is not empty
+        return null;
     }
 }
