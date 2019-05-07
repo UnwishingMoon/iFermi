@@ -18,9 +18,15 @@ import java.util.concurrent.ExecutionException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+/**
+ * Model of the Application, it is used for all non graphics tasks
+ * @version 1.0
+ * @since 1.0
+ */
 public class Model extends Observable {
     public final static String rssUrl = "https://www.fermimn.edu.it/?action=rss";
     public final static String classesUrl = "https://www.fermimn.edu.it/orari/orario_in_corso/";
+    public final static String imageRssUrl = "https://www.fermimn.edu.it/?clean=true&action=icon&newsid=";
 
     private List rssNews;
 
@@ -32,6 +38,10 @@ public class Model extends Observable {
     private WebsiteCheck wCheck;
     private File cacheDir;
 
+    /**
+     * Return the instance of the Model class, is single-ton
+     * @return Model
+     */
     public static Model getInstance(){
         if(instance == null){
             instance = new Model();
@@ -40,7 +50,7 @@ public class Model extends Observable {
     }
 
     private Model(){
-        this.rssNews = new ArrayList<>();
+        this.rssNews = new ArrayList<RssNews>();
 
         this.classesList = new ArrayList();
         this.schoolClass = "1A";
@@ -48,11 +58,19 @@ public class Model extends Observable {
         this.wCheck = new WebsiteCheck();
     }
 
+    /**
+     * Set the Path to the Cache Directory
+     * @param cacheDir Path to the Cache Directory of the System
+     */
     public void setCacheDir(File cacheDir) {
         this.cacheDir = cacheDir;
     }
 
-    public List getNewsList(){
+    /**
+     * It gets the news Rss file from the website, save and elaborate it
+     * @return List<RssNews>
+     */
+    public List<RssNews> getNewsList(){
         // Check if Classes List exists
         if(this.rssNews != null){
             return rssNews;
@@ -98,6 +116,11 @@ public class Model extends Observable {
         return null;
     }
 
+    /**
+     * It allocates the News in memory reading from the rss file
+     * @param f Rss File Path
+     * @throws Exception If it can't find the file
+     */
     private void createRssNews(File f) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder parser =  factory.newDocumentBuilder();
@@ -106,10 +129,25 @@ public class Model extends Observable {
         Element el = doc.getDocumentElement(); // Root Element
         NodeList itemList = el.getElementsByTagName("item"); // List of all Items
         for(int i = 0; i < itemList.getLength(); i++){
+            RssNews temp = new RssNews();
             Node n = itemList.item(i);
+            NodeList newsList = n.getChildNodes();
+
+            temp.setTitle(newsList.item(0).getTextContent()); // Get and set the title of the news
+            temp.setNewsDescription(newsList.item(1).getTextContent()); // Get and set the description of the news
+
+            String tempIconStr = newsList.item(2).getTextContent(); // Full String of the Icon
+            temp.setIconId(tempIconStr.substring(tempIconStr.lastIndexOf("#news"),tempIconStr.length())); // Only the Id of the Icon
+            rssNews.add(temp);
         }
     }
 
+    /**
+     * Download the file from a specified Url and saves it to a specific directory
+     * @param f Path where the file should be saved
+     * @param urlStr URL String where the file will be located on the Internet
+     * @throws IOException If some I/O Error occured
+     */
     private void downloadFile(File f, String urlStr) throws IOException{
         URL url = new URL(urlStr);
         BufferedInputStream bis = new BufferedInputStream(url.openStream()); // Input Stream of the URL
