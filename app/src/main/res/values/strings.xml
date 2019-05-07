@@ -18,7 +18,9 @@
 
     <string name="msg_welcome">Benvenuto</string>
 
-    <string name="menu_news">News</string>
+    <string name="toolbar_action_menu">Menu</string>
+
+    <string name="menu_news">Home / News</string>
     <string name="menu_student_zone">Area Studenti</string>
     <string name="menu_calendar">Calendario Giornaliero</string>
     <string name="menu_timetable">Orario</string>
