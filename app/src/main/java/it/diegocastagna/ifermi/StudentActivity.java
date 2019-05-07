@@ -10,4 +10,6 @@ public class StudentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
     }
+
+    // it's for "Zona studenti"
 }

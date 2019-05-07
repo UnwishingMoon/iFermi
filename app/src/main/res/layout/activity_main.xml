@@ -76,6 +76,7 @@
             android:layout_marginBottom="15dp">
 
             <LinearLayout
+                android:id="@+id/news_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -87,17 +88,6 @@
                     android:gravity="center"
                     android:text="@string/msg_welcome"
                     android:textSize="25sp"
-                    />
-
-                <TextView
-                    android:id="@+id/msg_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="-15dp"
-                    android:text=""
-                    android:visibility="invisible"
-                    android:textSize="30sp"
                     />
 
             </LinearLayout>
