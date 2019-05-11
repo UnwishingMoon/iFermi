@@ -12,11 +12,13 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".CalendarioActivity" />
         <activity android:name=".OrarioActivity" />
+        <activity android:name=".PopupActivity"
+            android:theme="@style/AppTheme.PopupTheme"/>
         <activity android:name=".AgendaActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".TutorialActivity" />
         <activity android:name=".MainActivity">
-           <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
