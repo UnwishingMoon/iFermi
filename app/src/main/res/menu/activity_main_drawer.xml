@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_news"
+            android:title="@string/menu_news" />
+        <item
+            android:id="@+id/nav_timetable"
+            android:title="@string/menu_timetable" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:title="@string/menu_calendar" />
+        <item
+            android:id="@+id/nav_school_calendar"
+            android:title="@string/menu_school_calendar" />
+        <item
+            android:id="@+id/nav_moodle"
+            android:title="@string/menu_moodle" />
+        <item
+            android:id="@+id/nav_register"
+            android:title="@string/menu_register" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/menu_settings" />
+    </group>
+
+</menu>

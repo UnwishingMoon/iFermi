@@ -82,7 +82,7 @@ public class Model extends Observable {
             try{
                 File f2 = new File(this.cacheDir, "newsCacheFileTemp.rss");
                 downloadFile(f2, rssUrl);
-                // Checking if files are the same
+                // Checking if files are the same TODO
 
                 // If they are different file, it deletes the old one and replace it with the new one
                 createRssNews(f);

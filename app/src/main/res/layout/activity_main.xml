@@ -5,112 +5,22 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
     <!-- Layout to contain contents of the main body of screen -->
-    <LinearLayout
-        android:id="@+id/content_layout"
+    <include
+        layout="@layout/activity_main_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#008577"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp">
-
-            <ImageButton
-                android:id="@+id/site_logo"
-                android:src="@drawable/ic_site_logo"
-                android:contentDescription="@string/logo_description"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:layout_marginStart="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/school_name"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/school_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/school_address"
-                    android:textSize="15sp"
-                    android:onClick="openGeoIntent"/>
-
-                <TextView
-                    android:id="@+id/school_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/school_phone"
-                    android:textSize="15sp"
-                    android:autoLink="phone"
-                    android:linksClickable="true"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp">
-
-            <LinearLayout
-                android:id="@+id/news_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/msg_welcome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/msg_welcome"
-                    android:textSize="25sp"
-                    />
-
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
     <!-- Layout to contain the navigation drawer -->
     <android.support.design.widget.NavigationView
-        android:id="@+id/menu_layout"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
-        app:menu="@menu/menu_drawer_view"
-        app:headerLayout="@layout/menu_header"/>
+        app:menu="@menu/activity_main_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>

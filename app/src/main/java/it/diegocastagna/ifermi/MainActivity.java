@@ -3,7 +3,10 @@ package it.diegocastagna.ifermi;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -17,24 +20,29 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity implements Observer {
+public class MainActivity extends AppCompatActivity implements Observer, NavigationView.OnNavigationItemSelectedListener {
     private Model mModel;
-    private DrawerLayout drawerLayout; // Drawer of the Entire Activity
     private LinearLayout newsContainer;
     private TextView msgWelcome; // welcome user message that
-    private Toolbar topToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        topToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout); // Create the Drawer Layour for the Menu and the main content
-        msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout); // Create the Drawer Layour for the Menu and the main content
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.app_name , R.string.app_name);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
         newsContainer = findViewById(R.id.news_container); // Linearlayout that should contain news
+        msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
 
         mModel = Model.getInstance();
         mModel.setCacheDir(getCacheDir());
@@ -48,24 +56,28 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate( R.menu.menu_toolbar, menu );
-        return true;
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.toolbar_action_menu:
-                // User chose the "Menu" item, show the app Menu
-                drawerLayout.openDrawer(Gravity.LEFT);
-                return true;
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
 
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+            case R.id.nav_news:
+                
+                break;
         }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     /**
