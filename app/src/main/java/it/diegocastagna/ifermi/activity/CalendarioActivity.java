@@ -13,7 +13,7 @@ public class CalendarioActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout layout = findViewById(R.id.activity_main_content);
+        FrameLayout layout = findViewById(R.id.activity_main_content_frame);
         getLayoutInflater().inflate(R.layout.activity_calendario, layout);
 
         final CalendarView calendarView = findViewById(R.id.calendarView);

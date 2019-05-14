@@ -1,6 +1,5 @@
 package it.diegocastagna.ifermi.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CalendarView;
@@ -14,7 +13,7 @@ public class AgendaActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout layout = findViewById(R.id.activity_main_content);
+        FrameLayout layout = findViewById(R.id.activity_main_content_frame);
         getLayoutInflater().inflate(R.layout.activity_agenda, layout);
         final CalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date = findViewById(R.id.date);

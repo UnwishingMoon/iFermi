@@ -1,11 +1,10 @@
 package it.diegocastagna.ifermi.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import it.diegocastagna.ifermi.R;
 
-public class TutorialActivity extends Activity {
+public class TutorialActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

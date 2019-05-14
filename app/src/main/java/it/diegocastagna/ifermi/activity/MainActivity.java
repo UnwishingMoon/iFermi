@@ -15,19 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
-import it.diegocastagna.ifermi.network.RssNews;
+import it.diegocastagna.ifermi.utils.RssNews;
 
-public class MainActivity extends AppCompatActivity implements Observer, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Model mModel;
     private LinearLayout newsContainer;
     private TextView msgWelcome; // welcome user message that
-    private DrawerLayout drawer;
-    private NavigationView navView;
+    private DrawerLayout drawer; // Drawer Layour for the Menu and the main content
+    private NavigationView navView; // Navigation View aka the menu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +46,8 @@ public class MainActivity extends AppCompatActivity implements Observer, Navigat
         newsContainer = findViewById(R.id.news_container); // Linearlayout that should contain news
         msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
 
-        mModel = Model.getInstance();
+        mModel = Model.getInstance(); // Model
         mModel.setCacheDir(getCacheDir());
-        mModel.addObserver(this);
 
         List l = mModel.getNewsList();
         for(Object o : l){
@@ -148,8 +145,4 @@ public class MainActivity extends AppCompatActivity implements Observer, Navigat
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }

@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import it.diegocastagna.ifermi.network.RssNews;
+import it.diegocastagna.ifermi.utils.RssNews;
 import it.diegocastagna.ifermi.network.WebsiteCheck;
 
 /**

@@ -15,7 +15,6 @@
         <activity android:name=".activity.PopupActivity"
             android:theme="@style/AppTheme.PopupTheme"/>
         <activity android:name=".activity.AgendaActivity" />
-        <activity android:name=".activity.StudentActivity" />
         <activity android:name=".activity.TutorialActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
