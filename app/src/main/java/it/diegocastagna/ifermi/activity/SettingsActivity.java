@@ -2,14 +2,16 @@ package it.diegocastagna.ifermi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 
 import it.diegocastagna.ifermi.R;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        FrameLayout layout = findViewById(R.id.activity_main_content);
+        getLayoutInflater().inflate(R.layout.activity_settings, layout);
     }
 }

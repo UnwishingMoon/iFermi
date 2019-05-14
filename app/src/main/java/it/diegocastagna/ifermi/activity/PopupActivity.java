@@ -25,7 +25,7 @@ public class PopupActivity extends Activity {
             TextView popup = findViewById(R.id.popup);
             popup.setText(selectedDate);
 
-            getWindow().setLayout((int) (width * .8), (int) (height * .8));
+            getWindow().setLayout((int) (width * .85), (int) (height * .85));
 
         }
 

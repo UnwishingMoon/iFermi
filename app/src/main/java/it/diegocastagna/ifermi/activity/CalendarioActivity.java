@@ -22,7 +22,7 @@ public class CalendarioActivity extends MainActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-                String selectedDate = (i1+1) + "/" + i2 + "/" + i;
+                String selectedDate = i2 + "/" + (i1+1) + "/" + i;
                 date.setText(selectedDate);
                 Intent intent = new Intent(CalendarioActivity.this, PopupActivity.class);
                 intent.putExtra("data",date.getText().toString());
