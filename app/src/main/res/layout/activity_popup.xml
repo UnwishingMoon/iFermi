@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/cardview_shadow_end_color"
     android:gravity="center"
-    tools:context=".PopupActivity">
+    tools:context=".activity.PopupActivity"
+    tools:ignore="PrivateResource">
     <TextView
         android:id="@+id/popup"
         android:layout_width="wrap_content"
@@ -14,5 +15,6 @@
         android:textColor="@color/cardview_dark_background"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        tools:ignore="PrivateResource" />
 </LinearLayout>

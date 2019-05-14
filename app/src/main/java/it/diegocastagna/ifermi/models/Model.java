@@ -1,4 +1,4 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.models;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,6 +17,9 @@ import java.util.concurrent.ExecutionException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import it.diegocastagna.ifermi.network.RssNews;
+import it.diegocastagna.ifermi.network.WebsiteCheck;
 
 /**
  * Model of the Application, it is used for all non graphics tasks

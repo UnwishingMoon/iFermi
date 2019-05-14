@@ -1,4 +1,4 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.network;
 
 public class RssNews {
     private String title;

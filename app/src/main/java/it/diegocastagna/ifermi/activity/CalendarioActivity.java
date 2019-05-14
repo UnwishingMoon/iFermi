@@ -1,21 +1,23 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class CalendarioActivity extends Activity {
+import it.diegocastagna.ifermi.R;
+
+public class CalendarioActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendario);
+        FrameLayout layout = findViewById(R.id.activity_main_content);
+        getLayoutInflater().inflate(R.layout.activity_calendario, layout);
+
         final CalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date =  findViewById(R.id.date);
-
-
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

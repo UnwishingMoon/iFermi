@@ -1,10 +1,12 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import it.diegocastagna.ifermi.R;
 
 public class AgendaActivity extends Activity {
 

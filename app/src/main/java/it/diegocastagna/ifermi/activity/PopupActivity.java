@@ -1,10 +1,12 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
+
+import it.diegocastagna.ifermi.R;
 
 public class PopupActivity extends Activity {
         @Override

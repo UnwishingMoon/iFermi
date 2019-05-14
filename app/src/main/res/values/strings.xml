@@ -25,4 +25,12 @@
     <string name="menu_moodle">Moodle</string>
     <string name="menu_register">Registro Elettronico</string>
     <string name="menu_settings">Impostazioni</string>
+    <string name="close_drawer">Close Menu</string>
+    <string name="open_drawer">Open Menu</string>
+
+    <!-- Agenda -->
+    <string name="agenda_title">Variazioni giornaliere</string>
+
+    <!-- Calendar -->
+    <string name="calendar_title">Calendario scolastico</string>
 </resources>

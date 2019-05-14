@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".CalendarioActivity" />
-        <activity android:name=".OrarioActivity" />
-        <activity android:name=".PopupActivity"
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.CalendarioActivity" />
+        <activity android:name=".activity.OrarioActivity" />
+        <activity android:name=".activity.PopupActivity"
             android:theme="@style/AppTheme.PopupTheme"/>
-        <activity android:name=".AgendaActivity" />
-        <activity android:name=".StudentActivity" />
-        <activity android:name=".TutorialActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.AgendaActivity" />
+        <activity android:name=".activity.StudentActivity" />
+        <activity android:name=".activity.TutorialActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

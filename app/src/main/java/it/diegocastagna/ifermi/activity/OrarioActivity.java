@@ -1,7 +1,9 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import it.diegocastagna.ifermi.R;
 
 public class OrarioActivity extends Activity {
 

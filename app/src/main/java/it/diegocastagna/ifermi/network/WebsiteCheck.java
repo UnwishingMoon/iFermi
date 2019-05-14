@@ -1,4 +1,4 @@
-package it.diegocastagna.ifermi;
+package it.diegocastagna.ifermi.network;
 
 import android.os.AsyncTask;
 

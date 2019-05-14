@@ -8,13 +8,14 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".AgendaActivity">
+    tools:context=".activity.AgendaActivity"
+    tools:ignore="PrivateResource">
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Variazioni giornaliere"
+        android:text="@string/agenda_title"
         android:layout_marginTop="50dp"
         android:textColor="#FFF"
         android:textSize="30sp"
