@@ -11,8 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         List l = mModel.getNewsList();
         for(Object o : l){
             RssNews r = (RssNews) o;
-
+            LinearLayout imageLayout;
         }
     }
 
@@ -101,16 +104,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navView.setCheckedItem(R.id.nav_school_calendar);
                 break;
             case R.id.nav_moodle:
-                intent = new Intent();
-                startActivity(intent);
-
-                navView.setCheckedItem(R.id.nav_moodle);
+                openExternalApp("com.moodle.moodlemobile", "https://moodle.fermi.mn.it/");
                 break;
             case R.id.nav_register:
-                intent = new Intent();
-                startActivity(intent);
-
-                navView.setCheckedItem(R.id.nav_register);
+                openExternalApp("it.mastercom.parents.app", "https://fermi-mn-sito.registroelettronico.com/");
                 break;
             case R.id.nav_settings:
                 intent = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -143,6 +140,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 System.out.println("[ERROR] Impossible to open Maps");
             }
         }
+    }
+
+    public void openExternalApp(String packageName, String fallBack) {
+        Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent == null) { // If there's no app with that package name
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fallBack));
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    protected void downloadSetupImage(String imageURL, ImageView target){
+        Picasso.get().load(imageURL).into(target);
+    }
+
+    protected void viewFullNews(View v){
+
     }
 
 }

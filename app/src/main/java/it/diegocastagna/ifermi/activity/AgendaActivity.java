@@ -18,8 +18,6 @@ public class AgendaActivity extends MainActivity {
         final CalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date = findViewById(R.id.date);
 
-
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {

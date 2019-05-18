@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_shadow_end_color"
-    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activity.PopupActivity"
     tools:ignore="PrivateResource">
 
-    <TextView
-        android:id="@+id/popup"
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/cardview_dark_background"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:textSize="30sp"
-        tools:ignore="PrivateResource" />
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
 </LinearLayout>
