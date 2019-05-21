@@ -1,6 +1,6 @@
 package it.diegocastagna.ifermi.activity;
 
-import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,23 +12,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
-import it.diegocastagna.ifermi.network.RssNews;
+import it.diegocastagna.ifermi.utils.RssNews;
 
-public class MainActivity extends AppCompatActivity implements Observer, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Model mModel;
     private LinearLayout newsContainer;
     private TextView msgWelcome; // welcome user message that
-    private DrawerLayout drawer;
-    private NavigationView navView;
+    private DrawerLayout drawer; // Drawer Layour for the Menu and the main content
+    private NavigationView navView; // Navigation View aka the menu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +51,41 @@ public class MainActivity extends AppCompatActivity implements Observer, Navigat
         navView.setNavigationItemSelectedListener(this);
 
         newsContainer = findViewById(R.id.news_container); // Linearlayout that should contain news
-        msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
+        //msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
 
-        mModel = Model.getInstance();
+        mModel = Model.getInstance(); // Model
         mModel.setCacheDir(getCacheDir());
-        mModel.addObserver(this);
 
-        List l = mModel.getNewsList();
+        ArrayList l = mModel.getNewsList();
         for(Object o : l){
+            Context context = getBaseContext();
             RssNews r = (RssNews) o;
 
+            LinearLayout parent = new LinearLayout(context);
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            parent.setOrientation(LinearLayout.HORIZONTAL);
+
+            // Children of the Parent LinearLayout
+            ImageView iv = new ImageView(context);
+            downloadSetupImage(r.getIconId(), iv);
+            LinearLayout layout = new LinearLayout(context);
+
+            parent.addView(iv);
+            parent.addView(layout);
+
+
+
+            // Children of the layout LinearLayout
+            TextView title = new TextView(context);
+            title.setText(r.getTitle());
+            TextView description = new TextView(context);
+            description.setText(r.getDescription());
+
+            layout.addView(title);
+            layout.addView(description);
+
+            //newsContainer.addView(parent);
+            newsContainer.addView(title);
         }
     }
 
@@ -105,17 +134,10 @@ public class MainActivity extends AppCompatActivity implements Observer, Navigat
                 navView.setCheckedItem(R.id.nav_school_calendar);
                 break;
             case R.id.nav_moodle:
-                Intent i = new Intent(Intent.ACTION_MAIN);
-                i.setComponent(new ComponentName("com.moodle.moodlemobile","com.moodle.moodlemobile.MainActivity"));
-                startActivity(i);
-
-                navView.setCheckedItem(R.id.nav_moodle);
+                openExternalApp("com.moodle.moodlemobile", "https://moodle.fermi.mn.it/");
                 break;
             case R.id.nav_register:
-                intent = new Intent();
-                startActivity(intent);
-
-                navView.setCheckedItem(R.id.nav_register);
+                openExternalApp("it.mastercom.parents.app", "https://fermi-mn-sito.registroelettronico.com/");
                 break;
             case R.id.nav_settings:
                 intent = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -147,11 +169,32 @@ public class MainActivity extends AppCompatActivity implements Observer, Navigat
             } catch (Exception e) {
                 System.out.println("[ERROR] Impossible to open Maps");
             }
+        } else if(v.getId() == R.id.site_logo) {
+            try {
+                uri = Uri.parse("https://www.fermimn.edu.it/");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            } catch (Exception e) {
+                System.out.println("[ERROR] Impossible to open the Browser");
+            }
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
+    public void openExternalApp(String packageName, String fallBack) {
+        Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent == null) { // If there's no app with that package name
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fallBack));
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    protected void downloadSetupImage(String imageURL, ImageView target){
+        Picasso.get().load(imageURL).into(target);
+    }
+
+    protected void viewFullNews(View v){
 
     }
+
 }

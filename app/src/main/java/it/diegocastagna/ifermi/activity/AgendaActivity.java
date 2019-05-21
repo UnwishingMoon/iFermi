@@ -24,6 +24,7 @@ public class AgendaActivity extends MainActivity {
                 String selectedDate = i2 + "/" + (i1+1) + "/" + i;
                 date.setText(selectedDate);
                 Intent intent = new Intent(AgendaActivity.this, PopupActivity.class);
+                intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_AGENDA);
                 intent.putExtra("data",date.getText().toString());
                 startActivity(intent);
             }

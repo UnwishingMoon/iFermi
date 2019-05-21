@@ -1,5 +1,7 @@
 package it.diegocastagna.ifermi.models;
 
+import android.widget.Toast;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -31,7 +33,7 @@ public class Model extends Observable {
     public final static String classesUrl = "https://www.fermimn.edu.it/orari/orario_in_corso/";
     public final static String imageRssUrl = "https://www.fermimn.edu.it/?clean=true&action=icon&newsid=";
 
-    private List rssNews;
+    private ArrayList<RssNews> rssNews;
 
     private final String classesCacheFile = "classesCacheFile.html";
     private List classesList;
@@ -53,7 +55,7 @@ public class Model extends Observable {
     }
 
     private Model(){
-        this.rssNews = new ArrayList<RssNews>();
+        this.rssNews = new ArrayList<>();
 
         this.classesList = new ArrayList();
         this.schoolClass = "1A";
@@ -71,17 +73,18 @@ public class Model extends Observable {
 
     /**
      * It gets the news Rss file from the website, save and elaborate it
-     * @return List<RssNews>
+     * @return ArrayList<RssNews>
      */
-    public List<RssNews> getNewsList(){
+    public ArrayList<RssNews> getNewsList(){
         // Check if Classes List exists
-        if(this.rssNews != null){
+        if(this.rssNews.size() > 0){
             return rssNews;
         }
 
         // Checking if Cache file Exists and is not empty
         File f = new File(this.cacheDir, "newsCacheFile.rss");
         if(f.exists()){
+            System.out.println("Text1234");
             try{
                 File f2 = new File(this.cacheDir, "newsCacheFileTemp.rss");
                 downloadFile(f2, rssUrl);
@@ -104,6 +107,7 @@ public class Model extends Observable {
                 isInternetActive = false;
             }
 
+            System.out.println(isInternetActive + "jnweduw");
             // Retrieve the file from the website
             if(isInternetActive) {
                 try {
@@ -137,7 +141,7 @@ public class Model extends Observable {
             NodeList newsList = n.getChildNodes();
 
             temp.setTitle(newsList.item(0).getTextContent()); // Get and set the title of the news
-            temp.setNewsDescription(newsList.item(1).getTextContent()); // Get and set the description of the news
+            temp.setDescription(newsList.item(1).getTextContent()); // Get and set the description of the news
 
             String tempIconStr = newsList.item(2).getTextContent(); // Full String of the Icon
             temp.setIconId(tempIconStr.substring(tempIconStr.lastIndexOf("#news"),tempIconStr.length())); // Only the Id of the Icon
