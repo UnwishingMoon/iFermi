@@ -26,6 +26,7 @@ import java.util.List;
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
 import it.diegocastagna.ifermi.utils.RssNews;
+import it.diegocastagna.ifermi.utils.RssNewsAsync;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Model mModel;
@@ -56,37 +57,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mModel = Model.getInstance(); // Model
         mModel.setCacheDir(getCacheDir());
 
-        ArrayList l = mModel.getNewsList();
-        for(Object o : l){
-            Context context = getBaseContext();
-            RssNews r = (RssNews) o;
+        new RssNewsAsync().execute(this, getBaseContext());
+    }
 
-            LinearLayout parent = new LinearLayout(context);
-            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            parent.setOrientation(LinearLayout.HORIZONTAL);
-
-            // Children of the Parent LinearLayout
-            ImageView iv = new ImageView(context);
-            downloadSetupImage(r.getIconId(), iv);
-            LinearLayout layout = new LinearLayout(context);
-
-            parent.addView(iv);
-            parent.addView(layout);
-
-
-
-            // Children of the layout LinearLayout
-            TextView title = new TextView(context);
-            title.setText(r.getTitle());
-            TextView description = new TextView(context);
-            description.setText(r.getDescription());
-
-            layout.addView(title);
-            layout.addView(description);
-
-            //newsContainer.addView(parent);
-            newsContainer.addView(title);
-        }
+    public void setNewsContainer(LinearLayout parent){
+        newsContainer.addView(parent);
     }
 
     @Override
@@ -189,9 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    protected void downloadSetupImage(String imageURL, ImageView target){
-        Picasso.get().load(imageURL).into(target);
-    }
+
 
     protected void viewFullNews(View v){
 
