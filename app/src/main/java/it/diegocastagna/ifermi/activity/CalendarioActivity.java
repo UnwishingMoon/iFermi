@@ -25,6 +25,7 @@ public class CalendarioActivity extends MainActivity {
                 String selectedDate = i2 + "/" + (i1+1) + "/" + i;
                 date.setText(selectedDate);
                 Intent intent = new Intent(CalendarioActivity.this, PopupActivity.class);
+                intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_CALENDARIO);
                 intent.putExtra("data",date.getText().toString());
                 startActivity(intent);
             }

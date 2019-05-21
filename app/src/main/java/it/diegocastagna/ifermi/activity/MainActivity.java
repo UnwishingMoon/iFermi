@@ -1,5 +1,6 @@
 package it.diegocastagna.ifermi.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,12 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.diegocastagna.ifermi.R;
@@ -47,15 +51,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView.setNavigationItemSelectedListener(this);
 
         newsContainer = findViewById(R.id.news_container); // Linearlayout that should contain news
-        msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
+        //msgWelcome = findViewById(R.id.msg_welcome); // TextView that will fade away after X seconds
 
         mModel = Model.getInstance(); // Model
         mModel.setCacheDir(getCacheDir());
 
-        List l = mModel.getNewsList();
+        ArrayList l = mModel.getNewsList();
         for(Object o : l){
+            Context context = getBaseContext();
             RssNews r = (RssNews) o;
-            LinearLayout imageLayout;
+
+            LinearLayout parent = new LinearLayout(context);
+            parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            parent.setOrientation(LinearLayout.HORIZONTAL);
+
+            // Children of the Parent LinearLayout
+            ImageView iv = new ImageView(context);
+            downloadSetupImage(r.getIconId(), iv);
+            LinearLayout layout = new LinearLayout(context);
+
+            parent.addView(iv);
+            parent.addView(layout);
+
+
+
+            // Children of the layout LinearLayout
+            TextView title = new TextView(context);
+            title.setText(r.getTitle());
+            TextView description = new TextView(context);
+            description.setText(r.getDescription());
+
+            layout.addView(title);
+            layout.addView(description);
+
+            //newsContainer.addView(parent);
+            newsContainer.addView(title);
         }
     }
 
@@ -138,6 +168,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             } catch (Exception e) {
                 System.out.println("[ERROR] Impossible to open Maps");
+            }
+        } else if(v.getId() == R.id.site_logo) {
+            try {
+                uri = Uri.parse("https://www.fermimn.edu.it/");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            } catch (Exception e) {
+                System.out.println("[ERROR] Impossible to open the Browser");
             }
         }
     }
