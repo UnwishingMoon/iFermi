@@ -9,10 +9,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
-
+/*
+* Class that parses an XML calendar in order to extrect events
+* */
 public class XMLEventsExtracter {
 
-    public static void extractEvents() {
+    /*
+     * Function that parses an XML calendar in order to extrect events
+     * @return map with events
+     * */
+    public Map extractEvents() {
 
         try {
             Map<String, String> map = new HashMap<String, String>();
@@ -50,8 +56,10 @@ public class XMLEventsExtracter {
                 String value = map.get(name).toString();
                 System.out.println(key + " " + value);
             }
+            return map;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

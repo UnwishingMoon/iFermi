@@ -22,10 +22,16 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
+/*
+* Class used to Download calendar in PDF format and to convert it in XML
+* */
 public class PDFtoXML{
 
-    public static void convertPDF() throws Exception {
+    /*
+    * Function that downloads a pdf from URL and then uses pdftables' API to convert it to an XML file
+    * @return boolean (true if successful, false otherwise)
+    * */
+    public boolean convertPDF() throws Exception {
         URL url = new URL("https://www.fermimn.edu.it/orari/a.s.%202018-19/calendario_scolastico_2018_2019%20al%2013_05_2019.pdf");
         InputStream in = url.openStream();
         FileOutputStream fos = new FileOutputStream(new File("calendar.pdf"));
@@ -71,18 +77,20 @@ public class PDFtoXML{
                 HttpEntity resEntity = response.getEntity();
                 if (resEntity != null) {
                     final String outputFilename = getOutputFilename(pdfFilename, format.replaceFirst("-.*$", ""));
-                    System.out.println("Writing output to " + outputFilename);
 
                     final File outputFile = new File(outputFilename);
                     FileUtils.copyToFile(resEntity.getContent(), outputFile);
+                    return true;
                 } else {
-                    System.out.println("Error: file missing from response");
-                    System.exit(1);
+                    return false;
                 }
             }
         }
     }
-
+    /*
+    * Function that decides how the output file is going to be named
+    * @return string with file name
+    * */
     private static String getOutputFilename(String pdfFilename, String suffix) {
         if (pdfFilename.length() >= 5 && pdfFilename.toLowerCase().endsWith(".pdf")) {
             return pdfFilename.substring(0, pdfFilename.length() - 4) + "." + suffix;
