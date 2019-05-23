@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import it.diegocastagna.ifermi.R;
 
 public class PopupActivity extends Activity {
@@ -20,18 +23,21 @@ public class PopupActivity extends Activity {
 
             Intent intent = getIntent();
             int type = intent.getIntExtra(TYPE_STRING, TYPE_CALENDARIO);
+            CalendarDay selectedDate;
             switch (type){
                 case 0: // Case Calendario
                     setContentView(R.layout.activity_popup);
 
-                    String selectedDate = intent.getStringExtra("data");
-                    ((TextView) findViewById(R.id.popup)).setText(selectedDate);
+                    selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
+                    String selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + (selectedDate.getYear()+1) ;
+                    ((TextView) findViewById(R.id.popup)).setText(selectedDateString);
                     break;
                 case 1: // Case Agenda
                     setContentView(R.layout.activity_popup);
 
-                    selectedDate = intent.getStringExtra("data");
-                    ((TextView) findViewById(R.id.popup)).setText(selectedDate);
+                    selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
+                    selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + (selectedDate.getYear()+1) ;
+                    ((TextView) findViewById(R.id.popup)).setText(selectedDateString);
                     break;
                 case 2: // Case News
                     setContentView(R.layout.activity_main_news_full);
@@ -46,6 +52,6 @@ public class PopupActivity extends Activity {
             DisplayMetrics dm = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-            getWindow().setLayout((int) (dm.widthPixels * .85), (int) (dm.heightPixels * .85));
+            getWindow().setLayout((int) (dm.widthPixels * .85), (int) (dm.heightPixels * .80));
         }
 }
