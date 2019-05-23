@@ -141,21 +141,21 @@ public class Model extends Observable {
         Document doc = parser.parse(f); // XML Document
         Element el = doc.getDocumentElement(); // Root Element
         NodeList itemList = el.getElementsByTagName("item"); // List of all Items
+        System.out.println();
         for(int i = 0; i < itemList.getLength(); i++){
             RssNews temp = new RssNews();
             Node n = itemList.item(i);
+            n.normalize();
             NodeList newsList = n.getChildNodes();
 
-            temp.setTitle(newsList.item(0).getTextContent()); // Get and set the title of the news
-            temp.setDescription(newsList.item(1).getTextContent()); // Get and set the description of the news
-            String tempIconStr = newsList.item(2).getTextContent(); // Full String of the Icon
+            temp.setTitle(newsList.item(1).getTextContent()); // Get and set the title of the news
+            temp.setDescription(newsList.item(3).getTextContent()); // Get and set the description of the news
+            String tempIconStr = newsList.item(5).getTextContent(); // Full String of the Icon
 
-            System.out.println("1113");
-            System.out.println(temp.getTitle());
-            System.out.println(temp.getDescription());
-            System.out.println(temp.getIconId());
-            temp.setIconId(tempIconStr.substring(tempIconStr.lastIndexOf("newsid="))); // Only the Id of the Icon
-            rssNews.add(temp);
+            System.out.println(newsList.item(0).getTextContent()+"1");
+
+            //temp.setIconId(tempIconStr.substring(tempIconStr.lastIndexOf("newsid="))); // Only the Id of the Icon
+            //rssNews.add(temp);
         }
     }
 
