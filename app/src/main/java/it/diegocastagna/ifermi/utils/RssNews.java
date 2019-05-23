@@ -3,7 +3,8 @@ package it.diegocastagna.ifermi.utils;
 public class RssNews {
     private String title;
     private String iconId;
-    private String description;
+    private String longDesc;
+    private String shortDesc;
 
     public RssNews() {
     }
@@ -24,12 +25,20 @@ public class RssNews {
         return iconId;
     }
 
-    /**
-     * Returns news description
-     * @return String
-     */
-    public String getDescription() {
-        return description;
+    public String getLongDesc() {
+        return longDesc;
+    }
+
+    public void setLongDesc(String longDesc) {
+        this.longDesc = longDesc;
+    }
+
+    public String getShortDesc() {
+        return shortDesc;
+    }
+
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
     }
 
     /**
@@ -46,13 +55,5 @@ public class RssNews {
      */
     public void setIconId(String iconId) {
         this.iconId = iconId;
-    }
-
-    /**
-     * Set the Description
-     * @param newsDescription Description to set
-     */
-    public void setDescription(String newsDescription) {
-        this.description = newsDescription;
     }
 }
