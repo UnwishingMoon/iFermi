@@ -38,7 +38,7 @@
             android:layout_height="300dp"
             app:mcv_firstDayOfWeek="monday"
             app:mcv_selectionMode="single"
-            app:mcv_selectionColor="#00F"
+            app:mcv_selectionColor="@color/design_default_color_primary"
             app:mcv_showOtherDates="all" />
     </LinearLayout>
 
