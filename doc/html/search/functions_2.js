@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['setcachedir',['setCacheDir',['../classit_1_1diegocastagna_1_1ifermi_1_1_model.html#a20afec0ef2cafa446628b2d7e852b34c',1,'it::diegocastagna::ifermi::Model']]],
-  ['seticonid',['setIconId',['../classit_1_1diegocastagna_1_1ifermi_1_1_rss_news.html#a5cc7736a0b4b038cc81394c044f25dad',1,'it::diegocastagna::ifermi::RssNews']]],
-  ['setnewsdescription',['setNewsDescription',['../classit_1_1diegocastagna_1_1ifermi_1_1_rss_news.html#addac79da6e66eb2aeffaa43d7b16b088',1,'it::diegocastagna::ifermi::RssNews']]],
-  ['settitle',['setTitle',['../classit_1_1diegocastagna_1_1ifermi_1_1_rss_news.html#ad323fc7a490f74343ce2cae7aaeebb35',1,'it::diegocastagna::ifermi::RssNews']]]
+  ['getdescription',['getDescription',['../classit_1_1diegocastagna_1_1ifermi_1_1utils_1_1_rss_news.html#a998c40cf41a5b73cbd2c68325acdd999',1,'it::diegocastagna::ifermi::utils::RssNews']]],
+  ['geticonid',['getIconId',['../classit_1_1diegocastagna_1_1ifermi_1_1utils_1_1_rss_news.html#a4058acee8ab782ebc158d03d48212040',1,'it::diegocastagna::ifermi::utils::RssNews']]],
+  ['getinstance',['getInstance',['../classit_1_1diegocastagna_1_1ifermi_1_1models_1_1_model.html#a467c28bc69afc493d5bb97a39bea3cbf',1,'it::diegocastagna::ifermi::models::Model']]],
+  ['getnewslist',['getNewsList',['../classit_1_1diegocastagna_1_1ifermi_1_1models_1_1_model.html#ae307bd31f5052d610605247b793000db',1,'it::diegocastagna::ifermi::models::Model']]],
+  ['gettitle',['getTitle',['../classit_1_1diegocastagna_1_1ifermi_1_1utils_1_1_rss_news.html#a440a726406ac659484bbc5abca1e6e58',1,'it::diegocastagna::ifermi::utils::RssNews']]]
 ];

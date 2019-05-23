@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['opengeointent',['openGeoIntent',['../classit_1_1diegocastagna_1_1ifermi_1_1_main_activity.html#ae2ae327990e45705546cae9f17ead95b',1,'it::diegocastagna::ifermi::MainActivity']]],
-  ['orarioactivity',['OrarioActivity',['../classit_1_1diegocastagna_1_1ifermi_1_1_orario_activity.html',1,'it::diegocastagna::ifermi']]]
+  ['mainactivity',['MainActivity',['../classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_main_activity.html',1,'it::diegocastagna::ifermi::activity']]],
+  ['model',['Model',['../classit_1_1diegocastagna_1_1ifermi_1_1models_1_1_model.html',1,'it::diegocastagna::ifermi::models']]]
 ];

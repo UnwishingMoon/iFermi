@@ -10,7 +10,9 @@ import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import it.diegocastagna.ifermi.R;
-
+/**
+ * Class that is used to show Popups in other classes
+ */
 public class PopupActivity extends Activity {
     public final static int TYPE_CALENDARIO = 0;
     public final static int TYPE_AGENDA = 1;

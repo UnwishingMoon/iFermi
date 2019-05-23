@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['websitecheck',['WebsiteCheck',['../classit_1_1diegocastagna_1_1ifermi_1_1_website_check.html',1,'it::diegocastagna::ifermi']]]
+  ['settingsactivity',['SettingsActivity',['../classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_settings_activity.html',1,'it::diegocastagna::ifermi::activity']]]
 ];
