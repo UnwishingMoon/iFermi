@@ -9,7 +9,11 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.util.Map;
+
 import it.diegocastagna.ifermi.R;
+import it.diegocastagna.ifermi.models.Model;
+
 /**
  * Class that is used to show Popups in other classes
  */
@@ -22,17 +26,17 @@ public class PopupActivity extends Activity {
     @Override
         protected void onCreate(Bundle savedInstanceState) { // Tutto tuo Kunal
             super.onCreate(savedInstanceState);
-
             Intent intent = getIntent();
+            Model mModel = Model.getInstance(); // Model
             int type = intent.getIntExtra(TYPE_STRING, TYPE_CALENDARIO);
-            CalendarDay selectedDate;
             switch (type){
                 case 0: // Case Calendario
                     setContentView(R.layout.activity_popup);
 
-                    selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
+                    Map<CalendarDay, String> events = mModel.getCalendarDates();
+                    CalendarDay selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
                     String selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + (selectedDate.getYear()+1) ;
-                    ((TextView) findViewById(R.id.popup)).setText(selectedDateString);
+                    ((TextView) findViewById(R.id.popup)).setText(events.get(selectedDate));
                     break;
                 case 1: // Case Agenda
                     setContentView(R.layout.activity_popup);

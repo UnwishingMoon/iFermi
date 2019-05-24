@@ -2,31 +2,27 @@ package it.diegocastagna.ifermi.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.text.style.ForegroundColorSpan;
-import android.widget.CalendarView;
+import android.view.Display;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
-import org.json.JSONObject;
-
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 
 import it.diegocastagna.ifermi.R;
+import it.diegocastagna.ifermi.models.Model;
 
 public class AgendaActivity extends MainActivity {
 
@@ -37,8 +33,25 @@ public class AgendaActivity extends MainActivity {
         getLayoutInflater().inflate(R.layout.activity_agenda, layout);
         final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date = findViewById(R.id.date);
+        Map<CalendarDay, String> events ;
+        HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
+        CalendarDay c = CalendarDay.from(2019,02,23);
+        dates.add( c);
 
-        //calendarView.addDecorator(new EventDecorator());
+
+        Model mModel = Model.getInstance(); // Model
+        try {
+            if (mModel.updateCalendar(this)){
+                events = mModel.getCalendarDates();
+                for (CalendarDay name: events.keySet()){
+                    dates.add(name);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        calendarView.addDecorator(new EventDecorator(0xFFFF0000,dates));
 
         calendarView.setOnDateChangedListener(
                 new OnDateSelectedListener() {
@@ -59,8 +72,8 @@ public class AgendaActivity extends MainActivity {
 
     public class EventDecorator implements DayViewDecorator {
 
-        private final int color;
-        private final HashSet<CalendarDay> dates;
+        private int color;
+        private HashSet<CalendarDay> dates;
 
         public EventDecorator(int color, Collection<CalendarDay> dates) {
             this.color = color;

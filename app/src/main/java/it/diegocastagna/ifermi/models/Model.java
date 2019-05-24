@@ -1,6 +1,9 @@
 package it.diegocastagna.ifermi.models;
 
+import android.content.Context;
 import android.os.AsyncTask;
+
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,14 +17,18 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
+import it.diegocastagna.ifermi.utils.PDFtoXML;
 import it.diegocastagna.ifermi.utils.RssNews;
+import it.diegocastagna.ifermi.utils.XMLEventsExtracter;
 
 /**
  * Model of the Application, it is used for all non graphics tasks
@@ -34,12 +41,19 @@ public class Model extends Observable {
     public final static String imageRssUrl = "https://www.fermimn.edu.it/?clean=true&action=icon&newsid=";
 
     private ArrayList<RssNews> rssNews;
+    private Map<CalendarDay, String> calendarDates;
+
 
     private final String classesCacheFile = "classesCacheFile.html";
     private List classesList;
     private String schoolClass;
 
     private static Model instance;
+
+    public File getCacheDir() {
+        return cacheDir;
+    }
+
     private File cacheDir;
 
     /**
@@ -53,11 +67,32 @@ public class Model extends Observable {
         return instance;
     }
 
+    public boolean updateCalendar(Context c) {
+        /*PDFtoXML p = new PDFtoXML();
+        try {
+            p.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }*/
+        calendarDates = new XMLEventsExtracter().extractEvents(c);
+
+        return true;
+    }
+
     private Model(){
         this.rssNews = new ArrayList<>();
 
         this.classesList = new ArrayList();
         this.schoolClass = "1A";
+    }
+
+    /**
+    * Returns a Map containing all the important dates of the school year
+     * @return Map<CalendarDay, String>
+     */
+    public Map<CalendarDay, String> getCalendarDates() {
+        return calendarDates;
     }
 
     /**

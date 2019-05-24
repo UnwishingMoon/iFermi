@@ -1,8 +1,13 @@
 package it.diegocastagna.ifermi.utils;
 
+import android.content.Context;
+import android.content.res.Resources;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.io.File;
+import java.io.InputStream;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,25 +17,33 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+
+import it.diegocastagna.ifermi.R;
+import it.diegocastagna.ifermi.models.Model;
+
 /**
 * Class that parses an XML calendar in order to extrect events
 */
 public class XMLEventsExtracter {
+    public XMLEventsExtracter() {
+    }
 
     /**
      * Function that parses an XML calendar in order to extrect events
      * @return map with events
      */
-    public Map extractEvents() {
-
+    public Map extractEvents(Context c) {
         try {
             Map<CalendarDay, String> map = new HashMap<CalendarDay, String>();
             String mesi[] = {"09", "10", "11", "12", "01", "02", "03", "04", "05", "06", "07", "08"};
             String eventi[] = new String[373];
-            File inputFile = new File("C:\\Users\\sahni\\Documents\\NetBeansProjects\\PDFToXML\\calendar.xml");
+            Model mModel = Model.getInstance(); // Mode
+            //File inputFile = new File(mModel.getCacheDir(), "calendar.xml");
+            //File inputFile = new File("../res/calendar.xml");
+            InputStream inputStream = c.getResources().openRawResource(R.raw.calendar);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
+            Document doc = dBuilder.parse(inputStream);
             doc.getDocumentElement().normalize();
             Element rootNode = doc.getDocumentElement();
             NodeList nList = doc.getElementsByTagName("page");
@@ -49,16 +62,20 @@ public class XMLEventsExtracter {
                 }
             }
 
-            for(int i=1; i<eventi.length; i++)
+            for(int i=1; i<eventi.length-1; i++){
+                if(i%31==0)
+                    i++;
                 if(!eventi[i].isEmpty()){
-                    map.put( CalendarDay.from(2019 , Integer.valueOf(mesi[i/31]), i%31) , eventi[i]);
-                }
+                    if (Integer.valueOf(mesi[i/31])< 9){
+                            map.put( CalendarDay.from(Calendar.getInstance().get(Calendar.YEAR) , Integer.valueOf(mesi[i/31]), i%31) , eventi[i]);
+                    }
 
-            for (CalendarDay name: map.keySet()){
-                String key = name.toString();
-                String value = map.get(name).toString();
-                System.out.println(key + " " + value);
+                    else{
+                            map.put( CalendarDay.from(Calendar.getInstance().get(Calendar.YEAR) - 1, Integer.valueOf(mesi[i/31]), i%31) , eventi[i]);
+                    }
+                }
             }
+
             return map;
         } catch (Exception e) {
             e.printStackTrace();

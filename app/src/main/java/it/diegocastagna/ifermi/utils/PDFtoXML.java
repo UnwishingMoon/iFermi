@@ -1,49 +1,42 @@
 package it.diegocastagna.ifermi.utils;
 
-import android.os.Build;
+import android.os.AsyncTask;
+
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.List;
-import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.client.config.CookieSpecs;
+import cz.msebera.android.httpclient.client.config.RequestConfig;
+import cz.msebera.android.httpclient.client.methods.CloseableHttpResponse;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.entity.mime.MultipartEntityBuilder;
+import cz.msebera.android.httpclient.entity.mime.content.FileBody;
+import cz.msebera.android.httpclient.impl.client.CloseableHttpClient;
+import cz.msebera.android.httpclient.impl.client.HttpClients;
+import it.diegocastagna.ifermi.models.Model;
+import it.diegocastagna.ifermi.network.DownloadFileFromURL;
+
 /**
 * Class used to Download calendar in PDF format and to convert it in XML
 */
-public class PDFtoXML{
+public class PDFtoXML extends AsyncTask {
 
     /**
     * Function that downloads a pdf from URL and then uses pdftables' API to convert it to an XML file
     * @return boolean (true if successful, false otherwise)
     */
     public boolean convertPDF() throws Exception {
-        URL url = new URL("https://www.fermimn.edu.it/orari/a.s.%202018-19/calendario_scolastico_2018_2019%20al%2013_05_2019.pdf");
-        InputStream in = url.openStream();
-        FileOutputStream fos = new FileOutputStream(new File("calendar.pdf"));
-        int length = -1;
-        byte[] buffer = new byte[1024];// buffer for portion of data from connection
-        while ((length = in.read(buffer)) > -1) {
-            fos.write(buffer, 0, length);
-        }
-        fos.close();
-        in.close();
 
-        String [] a = {"3vbu4qfqq37b", "xml", "calendar.pdf"};
+        System.out.println("\n INIZIO "+"\n");
+        Model mModel = Model.getInstance(); // Mode
+        File f = new File(mModel.getCacheDir(), "calendar.pdf");
+        new DownloadFileFromURL().execute(f, "https://www.fermimn.edu.it/orari/a.s.%202018-19/calendario_scolastico_2018_2019%20al%2013_05_2019.pdf").get();
+
+
+        String [] a = {"3vbu4qfqq37b", "xml", f.getPath()};
 
         final String apiKey = a[0];
         final String format = a[1].toLowerCase();
@@ -60,6 +53,7 @@ public class PDFtoXML{
             System.exit(1);
         }
 
+        System.out.println("\n RICHIESTA "+"\n");
         try (CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build()) {
             HttpPost httppost = new HttpPost("https://pdftables.com/api?format=" + format + "&key=" + apiKey);
             FileBody fileBody = new FileBody(inputFile);
@@ -69,19 +63,23 @@ public class PDFtoXML{
 
             System.out.println("Sending request");
 
+            System.out.println("\n INVIO "+"\n");
             try (CloseableHttpResponse response = httpclient.execute(httppost)) {
                 if (response.getStatusLine().getStatusCode() != 200) {
                     System.out.println(response.getStatusLine());
                     System.exit(1);
                 }
+                System.out.println("\n LETTURA "+"\n");
                 HttpEntity resEntity = response.getEntity();
                 if (resEntity != null) {
                     final String outputFilename = getOutputFilename(pdfFilename, format.replaceFirst("-.*$", ""));
-
+                    System.out.println("\n\n\n\n\n\n\n\n\\n\n\n\n"+outputFilename+"\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     final File outputFile = new File(outputFilename);
                     FileUtils.copyToFile(resEntity.getContent(), outputFile);
                     return true;
                 } else {
+
+                    System.out.println("\n\n\n\n\n\n\n\n\\n\n\n\n CIAO FALSO "+"\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     return false;
                 }
             }
@@ -96,6 +94,18 @@ public class PDFtoXML{
             return pdfFilename.substring(0, pdfFilename.length() - 4) + "." + suffix;
         } else {
             return pdfFilename + "." + suffix;
+        }
+    }
+
+    @Override
+    protected Boolean doInBackground(Object[] objects) {
+        try{
+            convertPDF();
+            return true;
+        }catch (IOException e) {
+            System.out.println("[ERROR]: During the conversion of pdf to xml: " + e);
+        } finally{
+            return false;
         }
     }
 }
