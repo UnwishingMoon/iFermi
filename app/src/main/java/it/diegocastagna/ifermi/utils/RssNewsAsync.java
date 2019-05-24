@@ -48,7 +48,7 @@ public class RssNewsAsync extends AsyncTask {
 
                 // Children of the Parent LinearLayout
                 ImageView iv = new ImageView(context);
-                downloadSetupImage(Model.imageRssUrl + r.getIconId(), iv);
+                downloadSetupImage(Model.IMAGERSSURL + r.getIconId(), iv);
                 LinearLayout layout = new LinearLayout(context);
 
                 parent.addView(iv);
