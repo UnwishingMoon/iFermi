@@ -23,6 +23,7 @@ import java.util.Map;
 
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
+import it.diegocastagna.ifermi.utils.Event;
 
 public class AgendaActivity extends MainActivity {
 
@@ -33,16 +34,14 @@ public class AgendaActivity extends MainActivity {
         getLayoutInflater().inflate(R.layout.activity_agenda, layout);
         final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date = findViewById(R.id.date);
-        Map<CalendarDay, String> events ;
+        Map<CalendarDay, Event> events ;
         HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
-        CalendarDay c = CalendarDay.from(2019,02,23);
-        dates.add( c);
 
 
         Model mModel = Model.getInstance(); // Model
         try {
-            if (mModel.updateCalendarEvents(this)){
-                events = mModel.getCalendarEvents();
+            if (mModel.updateAgendaEvents(this)){
+                events = mModel.getAgendaEvents();
                 for (CalendarDay name: events.keySet()){
                     dates.add(name);
                 }
@@ -57,9 +56,6 @@ public class AgendaActivity extends MainActivity {
                 new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay d, boolean selected) {
-                        String selectedDate =  d.getDay() + "/" + d.getMonth() + "/" + (d.getYear()+1);
-
-                        date.setText(selectedDate);
                         Intent intent = new Intent(AgendaActivity.this, PopupActivity.class);
                         intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_AGENDA);
                         intent.putExtra("data",new Gson().toJson(d));

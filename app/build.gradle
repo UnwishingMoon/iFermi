@@ -46,4 +46,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "cz.msebera.android:httpclient:4.5.8"
     implementation group: 'commons-io', name: 'commons-io', version: '2.5'
+    implementation 'net.sf.biweekly:biweekly:0.6.3'
 }

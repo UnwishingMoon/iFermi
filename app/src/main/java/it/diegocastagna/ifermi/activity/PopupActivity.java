@@ -35,14 +35,13 @@ public class PopupActivity extends Activity {
 
                     Map<CalendarDay, String> events = mModel.getCalendarEvents();
                     CalendarDay selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
-                    String selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + (selectedDate.getYear()+1) ;
                     ((TextView) findViewById(R.id.popup)).setText(events.get(selectedDate));
                     break;
                 case 1: // Case Agenda
                     setContentView(R.layout.activity_popup);
 
                     selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
-                    selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + (selectedDate.getYear()+1) ;
+                    String selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + selectedDate.getYear() ;
                     ((TextView) findViewById(R.id.popup)).setText(selectedDateString);
                     break;
                 case 2: // Case News

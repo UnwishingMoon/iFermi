@@ -1,23 +1,16 @@
 package it.diegocastagna.ifermi.models;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -26,8 +19,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
+import it.diegocastagna.ifermi.utils.ICSEventsExtracter;
 import it.diegocastagna.ifermi.utils.RssNews;
 import it.diegocastagna.ifermi.utils.XMLEventsExtracter;
+import  it.diegocastagna.ifermi.utils.Event;
 
 /**
  * Model of the Application, it is used for all non graphics tasks
@@ -40,8 +35,11 @@ public class Model extends Observable {
     public final static String IMAGERSSURL = "https://www.fermimn.edu.it/?clean=true&action=icon&newsid=";
 
     private ArrayList<RssNews> rssNews;
-
     private Map<CalendarDay, String> calendarEvents;
+
+
+
+    private  Map<CalendarDay, Event> agendaEvents;
 
     private final String classesCacheFile = "classesCacheFile.html";
     private List classesList;
@@ -73,13 +71,33 @@ public class Model extends Observable {
         this.schoolClass = "1A";
     }
 
-
+    /**
+     * Returns all the events of the current school year
+     * @return Map<CalendarDay, String>
+     */
     public Map<CalendarDay, String> getCalendarEvents() {
         return calendarEvents;
     }
 
+    /**
+     * Returns all the agenda events of the current school year
+     * @return Map<CalendarDay, Event> (Event is a custom class including description and time of an event)
+     */
+    public Map<CalendarDay, Event> getAgendaEvents() {
+        return agendaEvents;
+    }
+
     public Boolean updateCalendarEvents(Context context){
         calendarEvents = new XMLEventsExtracter().extractEvents(context);
+        return true;
+    }
+
+    public Boolean updateAgendaEvents(Context context){
+        try {
+            agendaEvents = new ICSEventsExtracter().extractEvents(context);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
