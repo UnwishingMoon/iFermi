@@ -39,7 +39,7 @@ public class Model extends Observable {
 
 
 
-    private  Map<CalendarDay, Event> agendaEvents;
+    private  Map<CalendarDay, ArrayList<Event>> agendaEvents;
 
     private final String classesCacheFile = "classesCacheFile.html";
     private List classesList;
@@ -83,8 +83,11 @@ public class Model extends Observable {
      * Returns all the agenda events of the current school year
      * @return Map<CalendarDay, Event> (Event is a custom class including description and time of an event)
      */
-    public Map<CalendarDay, Event> getAgendaEvents() {
+    public Map<CalendarDay, ArrayList<Event>> getAgendaEvents() {
         return agendaEvents;
+    }
+    public ArrayList<Event> getAgendaEventsOnDate(CalendarDay day) {
+        return agendaEvents.get(day);
     }
 
     public Boolean updateCalendarEvents(Context context){

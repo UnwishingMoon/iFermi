@@ -9,10 +9,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
+import it.diegocastagna.ifermi.utils.Event;
 
 /**
  * Class that is used to show Popups in other classes
@@ -35,14 +37,21 @@ public class PopupActivity extends Activity {
 
                     Map<CalendarDay, String> events = mModel.getCalendarEvents();
                     CalendarDay selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
-                    ((TextView) findViewById(R.id.popup)).setText(events.get(selectedDate));
+                    if(events.get(selectedDate) != null)
+                        ((TextView) findViewById(R.id.popup)).setText(events.get(selectedDate));
+                    else
+                        ((TextView) findViewById(R.id.popup)).setText("Non ci sono eventi");
                     break;
                 case 1: // Case Agenda
-                    setContentView(R.layout.activity_popup);
+                    setContentView(R.layout.activity_scrollable_popup);
 
                     selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
-                    String selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + selectedDate.getYear() ;
-                    ((TextView) findViewById(R.id.popup)).setText(selectedDateString);
+                    ArrayList<Event> agendaEvents = mModel.getAgendaEventsOnDate(selectedDate);
+                    if(!agendaEvents.isEmpty())
+                        for (Event e: agendaEvents)
+                            ((TextView) findViewById(R.id.popup)).append("\u2022 (" + e.getTime() + ") " + e.getDescription() + "\n");
+                    else
+                        ((TextView) findViewById(R.id.popup)).setText("Non ci sono eventi");
                     break;
                 case 2: // Case News
                     setContentView(R.layout.activity_main_news_full);

@@ -34,7 +34,7 @@ public class AgendaActivity extends MainActivity {
         getLayoutInflater().inflate(R.layout.activity_agenda, layout);
         final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date = findViewById(R.id.date);
-        Map<CalendarDay, Event> events ;
+        Map<CalendarDay, ArrayList<Event>> events ;
         HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
 
 
