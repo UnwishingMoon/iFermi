@@ -1,6 +1,9 @@
 package it.diegocastagna.ifermi.models;
 
+import android.content.Context;
 import android.os.AsyncTask;
+
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,7 +17,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,6 +27,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
 import it.diegocastagna.ifermi.utils.RssNews;
+import it.diegocastagna.ifermi.utils.XMLEventsExtracter;
 
 /**
  * Model of the Application, it is used for all non graphics tasks
@@ -35,11 +41,19 @@ public class Model extends Observable {
 
     private ArrayList<RssNews> rssNews;
 
+
+    private Map<CalendarDay, String> calendarEvents;
+
     private final String classesCacheFile = "classesCacheFile.html";
     private List classesList;
     private String schoolClass;
 
     private static Model instance;
+
+    public File getCacheDir() {
+        return cacheDir;
+    }
+
     private File cacheDir;
 
     /**
@@ -58,6 +72,16 @@ public class Model extends Observable {
 
         this.classesList = new ArrayList();
         this.schoolClass = "1A";
+    }
+
+
+    public Map<CalendarDay, String> getCalendarEvents() {
+        return calendarEvents;
+    }
+
+    public Boolean updateCalendarEvents(Context context){
+        calendarEvents = new XMLEventsExtracter().extractEvents(context);
+        return true;
     }
 
     /**
@@ -149,7 +173,7 @@ public class Model extends Observable {
             NodeList newsList = n.getChildNodes();
 
             temp.setTitle(newsList.item(1).getTextContent()); // Get and set the title of the news
-            temp.setDescription(newsList.item(3).getTextContent()); // Get and set the description of the news
+            temp.setLongDesc(newsList.item(3).getTextContent()); // Get and set the description of the news
             String tempIconStr = newsList.item(5).getTextContent(); // Full String of the Icon
 
             System.out.println(newsList.item(0).getTextContent()+"1");

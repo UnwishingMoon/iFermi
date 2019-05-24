@@ -38,8 +38,8 @@ public class CalendarioActivity extends MainActivity {
 
         Model mModel = Model.getInstance(); // Model
         try {
-            if (mModel.updateCalendar(this)){
-                events = mModel.getCalendarDates();
+            if (mModel.updateCalendarEvents(this)){
+                events = mModel.getCalendarEvents();
                 for (CalendarDay name: events.keySet()){
                     dates.add(name);
                 }
@@ -54,9 +54,6 @@ public class CalendarioActivity extends MainActivity {
                 new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay d, boolean selected) {
-                        String selectedDate =  d.getDay() + "/" + d.getMonth() + "/" + (d.getYear()+1);
-
-                        date.setText(selectedDate);
                         Intent intent = new Intent(CalendarioActivity.this, PopupActivity.class);
                         intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_CALENDARIO);
                         intent.putExtra("data",new Gson().toJson(d));

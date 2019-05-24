@@ -41,8 +41,8 @@ public class AgendaActivity extends MainActivity {
 
         Model mModel = Model.getInstance(); // Model
         try {
-            if (mModel.updateCalendar(this)){
-                events = mModel.getCalendarDates();
+            if (mModel.updateCalendarEvents(this)){
+                events = mModel.getCalendarEvents();
                 for (CalendarDay name: events.keySet()){
                     dates.add(name);
                 }

@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // Children of the Parent LinearLayout
                 ImageView iv = new ImageView(getBaseContext());
 
-                downloadSetupImage(mModel.IMAGERSSURL + r.getIconId(), iv);
+                downloadSetupImage(mModel.imageRssUrl + r.getIconId(), iv);
                 LinearLayout layout = new LinearLayout(getBaseContext());
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

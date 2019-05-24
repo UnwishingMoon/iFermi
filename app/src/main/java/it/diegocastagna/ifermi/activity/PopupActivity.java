@@ -33,7 +33,7 @@ public class PopupActivity extends Activity {
                 case 0: // Case Calendario
                     setContentView(R.layout.activity_popup);
 
-                    Map<CalendarDay, String> events = mModel.getCalendarDates();
+                    Map<CalendarDay, String> events = mModel.getCalendarEvents();
                     CalendarDay selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
                     String selectedDateString = selectedDate.getDay() + "/" +  selectedDate.getMonth() + "/" + (selectedDate.getYear()+1) ;
                     ((TextView) findViewById(R.id.popup)).setText(events.get(selectedDate));

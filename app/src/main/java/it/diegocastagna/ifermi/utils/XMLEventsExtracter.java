@@ -25,9 +25,6 @@ import it.diegocastagna.ifermi.models.Model;
 * Class that parses an XML calendar in order to extrect events
 */
 public class XMLEventsExtracter {
-    public XMLEventsExtracter() {
-    }
-
     /**
      * Function that parses an XML calendar in order to extrect events
      * @return map with events
