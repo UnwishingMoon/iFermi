@@ -1,9 +1,11 @@
 package it.diegocastagna.ifermi.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -37,6 +39,7 @@ public class PopupActivity extends Activity {
 
                     Map<CalendarDay, String> events = mModel.getCalendarEvents();
                     CalendarDay selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
+
                     if(events.get(selectedDate) != null)
                         ((TextView) findViewById(R.id.popup)).setText(events.get(selectedDate));
                     else
@@ -65,7 +68,10 @@ public class PopupActivity extends Activity {
 
             DisplayMetrics dm = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-            getWindow().setLayout((int) (dm.widthPixels * .85), (int) (dm.heightPixels * .80));
+            getWindow().setLayout((int) (dm.widthPixels * .85), ActionBar.LayoutParams.WRAP_CONTENT);
+            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+            layoutParams.dimAmount = 0.75f;
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            getWindow().setAttributes(layoutParams);
         }
 }

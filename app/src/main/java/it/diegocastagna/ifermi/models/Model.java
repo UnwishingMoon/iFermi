@@ -18,6 +18,7 @@ import java.util.Observable;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import it.diegocastagna.ifermi.activity.AgendaActivity;
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
 import it.diegocastagna.ifermi.utils.ICSEventsExtracter;
 import it.diegocastagna.ifermi.utils.RssNews;
@@ -36,6 +37,7 @@ public class Model extends Observable {
 
     private ArrayList<RssNews> rssNews;
     private Map<CalendarDay, String> calendarEvents;
+
 
 
 
@@ -86,6 +88,10 @@ public class Model extends Observable {
     public Map<CalendarDay, ArrayList<Event>> getAgendaEvents() {
         return agendaEvents;
     }
+
+    public void setAgendaEvents(Map<CalendarDay, ArrayList<Event>> agendaEvents) {
+        this.agendaEvents = agendaEvents;
+    }
     public ArrayList<Event> getAgendaEventsOnDate(CalendarDay day) {
         return agendaEvents.get(day);
     }
@@ -95,10 +101,12 @@ public class Model extends Observable {
         return true;
     }
 
-    public Boolean updateAgendaEvents(Context context){
+    public Boolean updateAgendaEvents(AgendaActivity a, Context context){
         try {
-            agendaEvents = new ICSEventsExtracter().extractEvents(context);
-        } catch (IOException e) {
+            ICSEventsExtracter task = new ICSEventsExtracter(a);
+            task.execute(context);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return true;
@@ -195,4 +203,5 @@ public class Model extends Observable {
         // Checking if Cache file Exists and is not empty
         return null;
     }
+
 }

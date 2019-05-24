@@ -26,30 +26,25 @@ import it.diegocastagna.ifermi.models.Model;
 import it.diegocastagna.ifermi.utils.Event;
 
 public class AgendaActivity extends MainActivity {
+    private static AgendaActivity instance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout layout = findViewById(R.id.activity_main_content_frame);
         getLayoutInflater().inflate(R.layout.activity_agenda, layout);
-        final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         final TextView date = findViewById(R.id.date);
         Map<CalendarDay, ArrayList<Event>> events ;
         HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
-
-
+        final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         Model mModel = Model.getInstance(); // Model
         try {
-            if (mModel.updateAgendaEvents(this)){
-                events = mModel.getAgendaEvents();
-                for (CalendarDay name: events.keySet()){
-                    dates.add(name);
-                }
-            }
+            mModel.updateAgendaEvents(this, this);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        calendarView.removeDecorators();
         calendarView.addDecorator(new EventDecorator(0xFFFF0000,dates));
 
         calendarView.setOnDateChangedListener(
@@ -64,6 +59,19 @@ public class AgendaActivity extends MainActivity {
                 }
         );
 
+    }
+
+    public void decorate(){
+        Map<CalendarDay, ArrayList<Event>> events ;
+        HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
+        Model mModel = Model.getInstance(); // Model
+        MaterialCalendarView calendarView = findViewById(R.id.calendarView);
+        events = mModel.getAgendaEvents();
+        for (CalendarDay name: events.keySet()){
+            dates.add(name);
+        }
+        calendarView.removeDecorators();
+        calendarView.addDecorator(new EventDecorator(0xFFFF0000,dates));
     }
 
     public class EventDecorator implements DayViewDecorator {
@@ -86,4 +94,5 @@ public class AgendaActivity extends MainActivity {
             view.addSpan(new DotSpan(5, color));
         }
     }
+
 }

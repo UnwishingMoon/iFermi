@@ -1,25 +1,56 @@
 package it.diegocastagna.ifermi.utils;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.util.DateTimeComponents;
 import it.diegocastagna.ifermi.R;
+import it.diegocastagna.ifermi.activity.AgendaActivity;
+import it.diegocastagna.ifermi.models.Model;
+import it.diegocastagna.ifermi.network.DownloadFileFromURL;
 
-public class ICSEventsExtracter {
-    public Map<CalendarDay, ArrayList<Event>> extractEvents(Context context) throws IOException {
+public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<CalendarDay, ArrayList<Event>>> {
+
+    public AgendaActivity caller;
+
+    private Model mMdodel = Model.getInstance();
+
+    public ICSEventsExtracter(AgendaActivity a) {
+        caller = a;
+    }
+
+    @Override
+    protected Map<CalendarDay, ArrayList<Event>> doInBackground(Context... contexts) {
+        /*File f2 = new File(mMdodel.getCacheDir(), "agenda.ics");
+        try {
+            new DownloadFileFromURL().execute(f2, "https://calendar.google.com/calendar/ical/isfermimantova%40gmail.com/public/basic.ics").get();
+        } catch (ExecutionException e) {
+            System.out.println("download fallito");
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            System.out.println("download fallito");
+            e.printStackTrace();
+        }*/
         Map<CalendarDay, ArrayList<Event>> events = new HashMap<CalendarDay, ArrayList<Event>>();
         ArrayList<EventWithDate> eventsList = new ArrayList<>();
-        ICalendar ical = Biweekly.parse(context.getResources().openRawResource(R.raw.agenda)).first();
+        ICalendar ical = null;
+        try {
+            ical = Biweekly.parse(contexts[0].getResources().openRawResource(R.raw.agenda)).first();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < ical.getEvents().size(); i++) {
             VEvent event = ical.getEvents().get(i);
             String summary = event.getSummary().getValue();
@@ -40,6 +71,13 @@ public class ICSEventsExtracter {
         return events;
     }
 
+    @Override
+    protected void onPostExecute(Map<CalendarDay, ArrayList<Event>> agendaEvents) {
+        mMdodel.setAgendaEvents(agendaEvents);
+        caller.decorate();
+        super.onPostExecute(agendaEvents);
+    }
+
     public class EventWithDate extends Event{
         public CalendarDay day;
         public EventWithDate(String description, String time, CalendarDay d) {
@@ -47,4 +85,5 @@ public class ICSEventsExtracter {
             this.day = d;
         }
     }
+
 }
