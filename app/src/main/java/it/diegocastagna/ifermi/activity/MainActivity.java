@@ -1,6 +1,7 @@
 package it.diegocastagna.ifermi.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.net.Uri;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void createViewsNews(){
         LinearLayout parent = new LinearLayout(getBaseContext());
-        parent.setOrientation(LinearLayout.HORIZONTAL);
+        parent.setOrientation(LinearLayout.VERTICAL);
 
         ArrayList l = mModel.getNewsList();
 
@@ -72,18 +73,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (Object o : l) {
                 RssNews r = (RssNews) o;
 
+                LinearLayout imageLayout = new LinearLayout(getBaseContext());
+                LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                imageParams.setMargins(0, 30, 0, 30);
+                imageLayout.setLayoutParams(imageParams);
+                imageLayout.setOrientation(LinearLayout.HORIZONTAL);
+
                 // Children of the Parent LinearLayout
                 ImageView iv = new ImageView(getBaseContext());
-
                 downloadSetupImage(mModel.IMAGERSSURL + r.getIconId(), iv);
-                LinearLayout layout = new LinearLayout(getBaseContext());
 
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout layout = new LinearLayout(getBaseContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams.setMargins(30, 0, 0, 0);
                 layout.setLayoutParams(layoutParams);
                 layout.setOrientation(LinearLayout.VERTICAL);
-
-                parent.addView(iv);
 
                 // Children of the layout LinearLayout
                 TextView title = new TextView(getBaseContext());
@@ -95,9 +99,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TextView description = new TextView(getBaseContext());
                 description.setText(r.getShortDesc());
 
+                TextView readMore = new TextView(getBaseContext());
+                readMore.setText("Leggi tutto");
+                readMore.setGravity(Gravity.END);
+                readMore.setTextColor(Color.parseColor("blue"));
+
+                parent.addView(imageLayout);
+                imageLayout.addView(iv);
+                imageLayout.addView(layout);
                 layout.addView(title);
                 layout.addView(description);
-                parent.addView(layout);
+                layout.addView(readMore);
             }
         } else {
             TextView title = new TextView(getBaseContext());

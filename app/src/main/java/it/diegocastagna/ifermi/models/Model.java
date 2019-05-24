@@ -130,7 +130,7 @@ public class Model extends Observable {
             }
         }
 
-        f.delete();
+        //f.delete();
         return rssNews;
     }
 
