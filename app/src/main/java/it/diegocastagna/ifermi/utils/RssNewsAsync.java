@@ -48,7 +48,7 @@ public class RssNewsAsync extends AsyncTask {
 
                 // Children of the Parent LinearLayout
                 ImageView iv = new ImageView(context);
-                downloadSetupImage(Model.imageRssUrl + r.getIconId(), iv);
+                downloadSetupImage(Model.IMAGERSSURL + r.getIconId(), iv);
                 LinearLayout layout = new LinearLayout(context);
 
                 parent.addView(iv);
@@ -57,7 +57,7 @@ public class RssNewsAsync extends AsyncTask {
                 TextView title = new TextView(context);
                 title.setText(r.getTitle());
                 TextView description = new TextView(context);
-                description.setText(r.getDescription());
+                description.setText(r.getShortDesc());
 
                 layout.addView(title);
                 layout.addView(description);
@@ -70,6 +70,7 @@ public class RssNewsAsync extends AsyncTask {
         }
     }
 
+    // Non funziona se non nel Main ._.
     protected void downloadSetupImage(String imageURL, ImageView target){
         Picasso.get().load(imageURL).into(target);
     }
