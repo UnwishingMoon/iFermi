@@ -32,7 +32,7 @@ import it.diegocastagna.ifermi.utils.Event;
 
 public class AgendaActivity extends MainActivity implements AdapterView.OnItemSelectedListener {
     public Model mModel = Model.getInstance(); // Model
-    public Map<CalendarDay, ArrayList<Event>> events ;
+    public Map<CalendarDay, ArrayList<Event>> events = null;
     public HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
 
     @Override
@@ -42,7 +42,7 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
         getLayoutInflater().inflate(R.layout.activity_agenda, layout);
         final TextView date = findViewById(R.id.date);
         date.setText("Download in corso delle variazioni giornaliere");
-        Map<CalendarDay, ArrayList<Event>> events ;
+        final Map<CalendarDay, ArrayList<Event>> events = null;
         HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
         final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         final Spinner dropdown = findViewById(R.id.spinner);
@@ -60,11 +60,13 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
                 new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay d, boolean selected) {
-                        Intent intent = new Intent(AgendaActivity.this, PopupActivity.class);
-                        intent.putExtra("className" , dropdown.getSelectedItem().toString());
-                        intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_AGENDA);
-                        intent.putExtra("data",new Gson().toJson(d));
-                        startActivity(intent);
+                        if(events!=null){
+                            Intent intent = new Intent(AgendaActivity.this, PopupActivity.class);
+                            intent.putExtra("className" , dropdown.getSelectedItem().toString());
+                            intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_AGENDA);
+                            intent.putExtra("data",new Gson().toJson(d));
+                            startActivity(intent);
+                        }
                     }
                 }
         );
