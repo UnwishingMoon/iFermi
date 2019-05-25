@@ -42,4 +42,9 @@
             app:mcv_showOtherDates="all" />
     </LinearLayout>
 
+    <Spinner
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Classe:"
+        android:id="@+id/spinner"></Spinner>
 </LinearLayout>

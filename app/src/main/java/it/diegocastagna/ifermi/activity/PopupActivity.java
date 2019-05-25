@@ -48,8 +48,15 @@ public class PopupActivity extends Activity {
                 case 1: // Case Agenda
                     setContentView(R.layout.activity_scrollable_popup);
 
+                    ArrayList<Event> agendaEvents = new ArrayList<>();
+
                     selectedDate = new Gson().fromJson(intent.getStringExtra("data"), CalendarDay.class);
-                    ArrayList<Event> agendaEvents = mModel.getAgendaEventsOnDate(selectedDate);
+                    String selectedClass = intent.getStringExtra("className");
+                    if(selectedClass.equals("Tutti gli eventi"))
+                        agendaEvents = mModel.getAgendaEventsOnDate(selectedDate);
+                    else
+                        agendaEvents = mModel.getAgendaClassEventsOnDate(selectedDate, selectedClass);
+
                     if(!agendaEvents.isEmpty())
                         for (Event e: agendaEvents)
                             ((TextView) findViewById(R.id.popup)).append("\u2022 (" + e.getTime() + ") " + e.getDescription() + "\n");

@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Display;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -25,9 +29,10 @@ import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
 import it.diegocastagna.ifermi.utils.Event;
 
-public class AgendaActivity extends MainActivity {
-    private static AgendaActivity instance;
-
+public class AgendaActivity extends MainActivity implements AdapterView.OnItemSelectedListener {
+    public Model mModel = Model.getInstance(); // Model
+    public Map<CalendarDay, ArrayList<Event>> events ;
+    public HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,10 @@ public class AgendaActivity extends MainActivity {
         Map<CalendarDay, ArrayList<Event>> events ;
         HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
         final MaterialCalendarView calendarView = findViewById(R.id.calendarView);
-        Model mModel = Model.getInstance(); // Model
+        final Spinner dropdown = findViewById(R.id.spinner);
+        Model mModel = Model.getInstance();
+
+
         try {
             mModel.updateAgendaEvents(this, this);
         } catch (Exception e) {
@@ -52,6 +60,7 @@ public class AgendaActivity extends MainActivity {
                     @Override
                     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay d, boolean selected) {
                         Intent intent = new Intent(AgendaActivity.this, PopupActivity.class);
+                        intent.putExtra("className" , dropdown.getSelectedItem().toString());
                         intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_AGENDA);
                         intent.putExtra("data",new Gson().toJson(d));
                         startActivity(intent);
@@ -61,18 +70,43 @@ public class AgendaActivity extends MainActivity {
 
     }
 
+    public void createSpinner(){
+        Spinner dropdown = findViewById(R.id.spinner);
+        String[] items = new String[]{"Tutti gli eventi", "1A ", "1B ", "1C "};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
+        if(position!=0){
+            events = mModel.getAgendaClassEvents(parent.getItemAtPosition(position).toString());
+            decorate();
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
     public void decorate(){
-        Map<CalendarDay, ArrayList<Event>> events ;
-        HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
-        Model mModel = Model.getInstance(); // Model
         MaterialCalendarView calendarView = findViewById(R.id.calendarView);
-        events = mModel.getAgendaEvents();
+        dates.clear();
         for (CalendarDay name: events.keySet()){
             dates.add(name);
         }
         calendarView.removeDecorators();
         calendarView.addDecorator(new EventDecorator(0xFFFF0000,dates));
     }
+
 
     public class EventDecorator implements DayViewDecorator {
 

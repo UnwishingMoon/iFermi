@@ -11,6 +11,8 @@ import org.w3c.dom.NodeList;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -92,6 +94,34 @@ public class Model extends Observable {
     public void setAgendaEvents(Map<CalendarDay, ArrayList<Event>> agendaEvents) {
         this.agendaEvents = agendaEvents;
     }
+    public Map<CalendarDay, ArrayList<Event>>  getAgendaClassEvents(String c) {
+        Map<CalendarDay, ArrayList<Event>>  classEvents = new HashMap<>();
+        for(Map.Entry<CalendarDay, ArrayList<Event>> entry : agendaEvents.entrySet()){
+            for (Event e: entry.getValue()){
+                if(e.getDescription().contains(c)){
+                    if(classEvents.get(entry.getKey())!=null)
+                        classEvents.get(entry.getKey()).add(e);
+                    else{
+                        ArrayList<Event> temp = new ArrayList<>();
+                        temp.add(e);
+                        classEvents.put(entry.getKey(), temp );
+                    }
+                }
+            }
+        }
+        return classEvents;
+    }
+
+    public ArrayList<Event> getAgendaClassEventsOnDate(CalendarDay d, String c) {
+        ArrayList<Event> classEvents = getAgendaEventsOnDate(d);
+        for (Event e: classEvents){
+            if(!e.getDescription().contains(c)){
+                classEvents.remove(e);
+            }
+        }
+        return classEvents;
+    }
+
     public ArrayList<Event> getAgendaEventsOnDate(CalendarDay day) {
         return agendaEvents.get(day);
     }
