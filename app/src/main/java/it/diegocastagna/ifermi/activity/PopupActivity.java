@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -80,7 +81,8 @@ public class PopupActivity extends Activity {
                     titleView.setText(title);
                     descView.setText(desc);
 
-                    Picasso.get().load(imageURL).into(iv);
+                    //iv.setVisibility(View.VISIBLE);
+                    //Picasso.get().load(imageURL).into(iv);
                     break;
             }
 

@@ -3,7 +3,6 @@ package it.diegocastagna.ifermi.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +24,6 @@ import java.util.ArrayList;
 
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
-import it.diegocastagna.ifermi.utils.ImageNewsOnClickListener;
 import it.diegocastagna.ifermi.utils.RssNews;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(!l.isEmpty()) {
             for (Object o : l) {
-                RssNews r = (RssNews) o;
+                final RssNews r = (RssNews) o;
 
                 LinearLayout imageLayout = new LinearLayout(getBaseContext());
                 LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -112,7 +109,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 layout.addView(readMore);
 
                 // When you click the news, it will open it in PopupActivity
-                readMore.setOnClickListener(new ImageNewsOnClickListener(mModel.IMAGERSSURL + r.getIconId(), r.getTitle(), r.getLongDesc(), getBaseContext()));
+                readMore.setOnClickListener(new View.OnClickListener(){
+                    public void onClick(View v){
+                        Intent i = new Intent(getBaseContext(), PopupActivity.class);
+                        i.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_NEWS);
+                        i.putExtra("imageUrl", mModel.IMAGERSSURL + r.getIconId());
+                        i.putExtra("title", r.getTitle());
+                        i.putExtra("description", r.getLongDesc());
+                        startActivity(i);
+                    }
+                });
             }
         } else {
             TextView title = new TextView(getBaseContext());
@@ -164,8 +170,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Picasso.get().load(imageURL).into(target);
     }
 
-    protected void viewFullNews(View v){
-
+    protected void viewFullNews(String imageUrl, String title, String desc){
+        Intent i = new Intent(getBaseContext(), PopupActivity.class);
+        i.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_NEWS);
+        i.putExtra("imageUrl", imageUrl);
+        i.putExtra("title", title);
+        i.putExtra("description", desc);
+        startActivity(i);
     }
 
     @Override
