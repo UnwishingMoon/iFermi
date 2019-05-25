@@ -26,12 +26,12 @@ import java.util.ArrayList;
 
 import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.models.Model;
+import it.diegocastagna.ifermi.utils.ImageNewsOnClickListener;
 import it.diegocastagna.ifermi.utils.RssNews;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Model mModel;
     private LinearLayout newsContainer;
-    private TextView msgWelcome; // welcome user message that
     private DrawerLayout drawer; // Drawer Layour for the Menu and the main content
     private NavigationView navView; // Navigation View aka the menu
 
@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 layout.addView(title);
                 layout.addView(description);
                 layout.addView(readMore);
+
+                // When you click the news, it will open it in PopupActivity
+                readMore.setOnClickListener(new ImageNewsOnClickListener(mModel.IMAGERSSURL + r.getIconId(), r.getTitle(), r.getLongDesc(), getBaseContext()));
             }
         } else {
             TextView title = new TextView(getBaseContext());
@@ -182,28 +185,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch(item.getItemId()){
             case R.id.nav_news:
-                intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
 
                 navView.setCheckedItem(R.id.nav_news);
                 break;
             case R.id.nav_timetable:
-                intent = new Intent(getApplicationContext(), OrarioActivity.class);
+                intent = new Intent(getBaseContext(), OrarioActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
 
                 navView.setCheckedItem(R.id.nav_timetable);
                 break;
             case R.id.nav_calendar:
-                intent = new Intent(getApplicationContext(), AgendaActivity.class);
+                intent = new Intent(getBaseContext(), AgendaActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
 
                 navView.setCheckedItem(R.id.nav_calendar);
                 break;
             case R.id.nav_school_calendar:
-                intent = new Intent(getApplicationContext(), CalendarioActivity.class);
+                intent = new Intent(getBaseContext(), CalendarioActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
 
@@ -216,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 openExternalApp("it.mastercom.parents.app", "https://fermi-mn-sito.registroelettronico.com/");
                 break;
             case R.id.nav_settings:
-                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                intent = new Intent(getBaseContext(), SettingsActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
 

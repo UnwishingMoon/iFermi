@@ -35,7 +35,6 @@ public class CalendarioActivity extends MainActivity {
         Map<CalendarDay, String> events ;
         HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
 
-
         Model mModel = Model.getInstance(); // Model
         try {
             if (mModel.updateCalendarEvents(this)){

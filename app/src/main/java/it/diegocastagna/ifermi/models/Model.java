@@ -176,6 +176,7 @@ public class Model extends Observable {
                         createRssNews(f2);
                     }
                 }
+                createRssNews(f);
                 f2.delete();
             }catch (Exception e){
                 System.out.println("[ERROR]: During the creation of Rss News Tree in Memory: " + e);

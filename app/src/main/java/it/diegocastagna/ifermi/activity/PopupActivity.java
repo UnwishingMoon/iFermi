@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class PopupActivity extends Activity {
     public final static String TYPE_STRING = "type";
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) { // Tutto tuo Kunal
+        protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             Intent intent = getIntent();
             Model mModel = Model.getInstance(); // Model
@@ -69,7 +71,14 @@ public class PopupActivity extends Activity {
                     String title = intent.getStringExtra("title");
                     String desc = intent.getStringExtra("description");
 
+                    ImageView iv = findViewById(R.id.news_image);
+                    TextView titleView = findViewById(R.id.news_title);
+                    TextView descView = findViewById(R.id.news_description);
 
+                    titleView.setText(title);
+                    descView.setText(desc);
+
+                    Picasso.get().load(imageURL).into(iv);
                     break;
             }
 
