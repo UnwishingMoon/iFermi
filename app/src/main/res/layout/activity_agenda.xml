@@ -31,9 +31,11 @@
         android:layout_width="300dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/bg_calen"
+        android:clickable="false"
         android:layout_height="wrap_content">
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
+            android:clickable="false"
             android:layout_width="300dp"
             android:layout_height="300dp"
             app:mcv_firstDayOfWeek="monday"

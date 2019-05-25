@@ -47,7 +47,6 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
         final Spinner dropdown = findViewById(R.id.spinner);
         Model mModel = Model.getInstance();
 
-
         try {
             mModel.updateAgendaEvents(this, this);
         } catch (Exception e) {
@@ -106,6 +105,7 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
 
     public void decorate(){
         MaterialCalendarView calendarView = findViewById(R.id.calendarView);
+        calendarView.setClickable(true);
         dates.clear();
         for (CalendarDay name: events.keySet()){
             dates.add(name);
