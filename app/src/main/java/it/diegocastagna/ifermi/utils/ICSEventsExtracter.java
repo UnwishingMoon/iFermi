@@ -8,6 +8,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -60,6 +62,8 @@ public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<Calenda
             EventWithDate e = new EventWithDate(summary, time, d);
             eventsList.add(e);
         }
+        Collections.sort(eventsList);
+
         for (EventWithDate e : eventsList){
             if(events.get(e.day) != null)
                 events.get(e.day).add(new Event(e.getDescription(), e.getTime()));

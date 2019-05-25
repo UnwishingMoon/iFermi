@@ -3,18 +3,21 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@color/cardview_shadow_end_color"
+    android:background="@drawable/bg_calen"
 android:gravity="top|center_horizontal"
 tools:context=".activity.PopupActivity"
 tools:ignore="PrivateResource">
     <ScrollView
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
+        android:layout_margin = "2dp"
+        android:background="@drawable/bg_calen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/popup"
             android:layout_width="wrap_content"
+            android:background="@drawable/bg_calen"
             android:layout_height="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_gravity="center_horizontal"

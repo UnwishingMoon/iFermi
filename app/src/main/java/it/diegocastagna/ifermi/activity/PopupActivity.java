@@ -3,6 +3,8 @@ package it.diegocastagna.ifermi.activity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -59,7 +61,7 @@ public class PopupActivity extends Activity {
 
                     if(!agendaEvents.isEmpty())
                         for (Event e: agendaEvents)
-                            ((TextView) findViewById(R.id.popup)).append("\u2022 (" + e.getTime() + ") " + e.getDescription() + "\n");
+                            ((TextView) findViewById(R.id.popup)).append("\u2022 (" + e.getTime() + ") " + e.getDescription() + "\n\n");
                     else
                         ((TextView) findViewById(R.id.popup)).setText("Non ci sono eventi");
                     break;
@@ -77,7 +79,9 @@ public class PopupActivity extends Activity {
             getWindowManager().getDefaultDisplay().getMetrics(dm);
             getWindow().setLayout((int) (dm.widthPixels * .85), ActionBar.LayoutParams.WRAP_CONTENT);
             WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-            layoutParams.dimAmount = 0.75f;
+            getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        layoutParams.dimAmount = 0.75f;
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             getWindow().setAttributes(layoutParams);
         }
