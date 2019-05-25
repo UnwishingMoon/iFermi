@@ -8,8 +8,10 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -35,6 +37,12 @@ public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<Calenda
 
     @Override
     protected Map<CalendarDay, ArrayList<Event>> doInBackground(Context... contexts) {
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
         /*File f2 = new File(mMdodel.getCacheDir(), "agenda.ics");
         try {
             new DownloadFileFromURL().execute(f2, "https://calendar.google.com/calendar/ical/isfermimantova%40gmail.com/public/basic.ics").get();
@@ -57,6 +65,9 @@ public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<Calenda
             VEvent event = ical.getEvents().get(i);
             String summary = event.getSummary().getValue();
             DateTimeComponents date = event.getDateStart().getValue().getRawComponents();
+            if (date.getYear()<= year && date.getMonth()<= month && date.getDate()<day){
+                break;
+            }
             CalendarDay d = CalendarDay.from(date.getYear(), date.getMonth(), date.getDate());
             String time = date.getHour() + ":" + date.getMinute();
             EventWithDate e = new EventWithDate(summary, time, d);
