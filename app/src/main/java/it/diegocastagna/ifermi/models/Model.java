@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -114,9 +115,10 @@ public class Model extends Observable {
 
     public ArrayList<Event> getAgendaClassEventsOnDate(CalendarDay d, String c) {
         ArrayList<Event> classEvents = getAgendaEventsOnDate(d);
-        for (Event e: classEvents){
-            if(!e.getDescription().contains(c)){
-                classEvents.remove(e);
+        for (Iterator<Event> iterator = classEvents.iterator(); iterator.hasNext(); ) {
+            Event value = iterator.next();
+            if (!value.getDescription().contains(c)) {
+                iterator.remove();
             }
         }
         return classEvents;
