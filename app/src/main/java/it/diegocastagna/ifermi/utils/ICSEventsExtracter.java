@@ -79,6 +79,7 @@ public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<Calenda
     protected void onPostExecute(Map<CalendarDay, ArrayList<Event>> agendaEvents) {
         mModel.setAgendaEvents(agendaEvents);
         caller.events = mModel.getAgendaEvents();
+        caller.loading = false;
         caller.decorate();
         caller.createSpinner();
         super.onPostExecute(agendaEvents);

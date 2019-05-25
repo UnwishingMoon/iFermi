@@ -34,6 +34,7 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
     public Model mModel = Model.getInstance(); // Model
     public Map<CalendarDay, ArrayList<Event>> events = null;
     public HashSet<CalendarDay> dates = new HashSet<CalendarDay>();
+    public Boolean loading = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
                 new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay d, boolean selected) {
-                        if(events!=null){
+                        if(!loading){
                             Intent intent = new Intent(AgendaActivity.this, PopupActivity.class);
                             intent.putExtra("className" , dropdown.getSelectedItem().toString());
                             intent.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_AGENDA);
