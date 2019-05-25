@@ -17,7 +17,8 @@ public class Event {
 
     public Event(String description, String time) {
         this.description = description;
-        this.time = normalizeTime(time);
+        String timeAdjustedToTimeZone = time.replace(time.substring(0,time.indexOf(":")),String.valueOf(Integer.valueOf(time.substring(0,time.indexOf(":")))+1));
+        this.time = normalizeTime(timeAdjustedToTimeZone);
     }
 
     private String normalizeTime(String time){
