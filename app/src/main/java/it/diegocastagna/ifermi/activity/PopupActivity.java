@@ -62,7 +62,7 @@ public class PopupActivity extends Activity {
                     else
                         agendaEvents = mModel.getAgendaClassEventsOnDate(selectedDate, selectedClass);
 
-                    if(!agendaEvents.isEmpty())
+                    if(agendaEvents != null)
                         for (Event e: agendaEvents)
                             ((TextView) findViewById(R.id.popup)).append("\u2022 (" + e.getTime() + ") " + e.getDescription() + "\n\n");
                     else
