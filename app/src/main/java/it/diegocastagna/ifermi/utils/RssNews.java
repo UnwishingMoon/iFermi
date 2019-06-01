@@ -1,5 +1,8 @@
 package it.diegocastagna.ifermi.utils;
 
+/**
+ * It is the news
+ */
 public class RssNews {
     private String title;
     private String iconId;

@@ -56,10 +56,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         createViewsNews();
     }
 
+    /**
+     * Set the Container of the news with this child that should contains all the news
+     * @param parent LinearLayout that will contains everything
+     */
     public void setNewsContainer(LinearLayout parent){
         newsContainer.addView(parent);
     }
 
+    /**
+     * It creates the news containers
+     */
     private void createViewsNews(){
         LinearLayout parent = new LinearLayout(getBaseContext());
         parent.setOrientation(LinearLayout.VERTICAL);
@@ -157,6 +164,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /**
+     * It opens the external app with that package or it will use a fallback
+     * @param packageName String with the package name
+     * @param fallBack String that will be used to fallback
+     */
     public void openExternalApp(String packageName, String fallBack) {
         Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
         if (intent == null) { // If there's no app with that package name
@@ -166,17 +178,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
+    /**
+     * Download the Image from Url and insert into a ImageView
+     * @param imageURL URL where the image is
+     * @param target Where to put it in
+     */
     public void downloadSetupImage(String imageURL, ImageView target){
         Picasso.get().load(imageURL).into(target);
-    }
-
-    protected void viewFullNews(String imageUrl, String title, String desc){
-        Intent i = new Intent(getBaseContext(), PopupActivity.class);
-        i.putExtra(PopupActivity.TYPE_STRING, PopupActivity.TYPE_NEWS);
-        i.putExtra("imageUrl", imageUrl);
-        i.putExtra("title", title);
-        i.putExtra("description", desc);
-        startActivity(i);
     }
 
     @Override
@@ -190,6 +198,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    /**
+     * It opens the item selected on the Menu
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         Intent intent;

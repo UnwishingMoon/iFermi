@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import it.diegocastagna.ifermi.activity.MainActivity;
 import it.diegocastagna.ifermi.models.Model;
 
+/**
+ * It creates the News in Async and set the view when it is done
+ */
 public class RssNewsAsync extends AsyncTask {
     private MainActivity main;
     private Context context;

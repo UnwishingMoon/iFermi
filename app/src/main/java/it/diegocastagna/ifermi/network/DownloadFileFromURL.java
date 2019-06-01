@@ -12,6 +12,9 @@ import java.net.URL;
 
 import it.diegocastagna.ifermi.models.Model;
 
+/**
+ * Download a file froma URL Async
+ */
 public class DownloadFileFromURL extends AsyncTask {
     private File f;
     private String urlStr;
