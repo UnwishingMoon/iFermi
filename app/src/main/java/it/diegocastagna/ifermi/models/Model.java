@@ -1,6 +1,7 @@
 package it.diegocastagna.ifermi.models;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
@@ -24,6 +25,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import it.diegocastagna.ifermi.activity.AgendaActivity;
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
 import it.diegocastagna.ifermi.utils.ICSEventsExtracter;
+import it.diegocastagna.ifermi.utils.PDFtoXML;
 import it.diegocastagna.ifermi.utils.RssNews;
 import it.diegocastagna.ifermi.utils.XMLEventsExtracter;
 import  it.diegocastagna.ifermi.utils.Event;
@@ -129,6 +131,8 @@ public class Model extends Observable {
     }
 
     public Boolean updateCalendarEvents(Context context){
+        PDFtoXML task = new PDFtoXML();
+        task.execute();
         calendarEvents = new XMLEventsExtracter().extractEvents(context);
         return true;
     }

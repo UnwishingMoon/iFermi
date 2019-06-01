@@ -1,5 +1,6 @@
 package it.diegocastagna.ifermi.utils;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.commons.io.FileUtils;
@@ -22,7 +23,7 @@ import it.diegocastagna.ifermi.network.DownloadFileFromURL;
 /**
 * Class used to Download calendar in PDF format and to convert it in XML
 */
-public class PDFtoXML extends AsyncTask {
+public class PDFtoXML extends AsyncTask <Context, Integer, Boolean>{
 
     /**
     * Function that downloads a pdf from URL and then uses pdftables' API to convert it to an XML file
@@ -98,7 +99,7 @@ public class PDFtoXML extends AsyncTask {
     }
 
     @Override
-    protected Boolean doInBackground(Object[] objects) {
+    protected Boolean doInBackground(Context... contexts) {
         try{
             convertPDF();
             return true;
