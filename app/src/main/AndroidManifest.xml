@@ -9,7 +9,6 @@
         android:roundIcon="@drawable/ic_site_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.CalendarioActivity" />
         <activity android:name=".activity.OrarioActivity" />
         <activity android:name=".activity.PopupActivity"
@@ -19,6 +18,15 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
