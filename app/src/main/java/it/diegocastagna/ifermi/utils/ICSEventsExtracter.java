@@ -24,13 +24,19 @@ import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.activity.AgendaActivity;
 import it.diegocastagna.ifermi.models.Model;
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
-
+/**
+* Extracts events from a .ics file written in icalendar format
+* */
 public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<CalendarDay, ArrayList<Event>>> {
 
     public AgendaActivity caller;
 
     private Model mModel = Model.getInstance();
 
+    /**
+     * Class constructor
+     * @param a, represents the caller activity
+     */
     public ICSEventsExtracter(AgendaActivity a) {
         caller = a;
     }

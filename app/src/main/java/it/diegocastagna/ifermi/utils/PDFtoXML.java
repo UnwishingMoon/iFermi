@@ -88,7 +88,7 @@ public class PDFtoXML extends AsyncTask <Context, Integer, Boolean>{
     }
     /**
     * Function that decides how the output file is going to be named
-    * @return string with file name
+    * @return String with file name
     */
     private static String getOutputFilename(String pdfFilename, String suffix) {
         if (pdfFilename.length() >= 5 && pdfFilename.toLowerCase().endsWith(".pdf")) {

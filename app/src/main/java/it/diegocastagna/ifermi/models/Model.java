@@ -93,10 +93,19 @@ public class Model extends Observable {
     public Map<CalendarDay, ArrayList<Event>> getAgendaEvents() {
         return agendaEvents;
     }
-
+    /**
+     * Setter class for agenda events
+     * @param agendaEvents (Event is a custom class including description and time of an event)
+     */
     public void setAgendaEvents(Map<CalendarDay, ArrayList<Event>> agendaEvents) {
         this.agendaEvents = agendaEvents;
     }
+
+    /**
+     * Method that returns all the agendaEvents of a specific class
+     * @param c, represents the class you want to look for
+     * @return Map<CalendarDay, ArrayList<Event>>
+     */
     public Map<CalendarDay, ArrayList<Event>>  getAgendaClassEvents(String c) {
         Map<CalendarDay, ArrayList<Event>>  classEvents = new HashMap<>();
         for(Map.Entry<CalendarDay, ArrayList<Event>> entry : agendaEvents.entrySet()){
@@ -115,6 +124,12 @@ public class Model extends Observable {
         return classEvents;
     }
 
+    /**
+     * Method that returns all the agendaEvents of a specific class on a specific date
+     * @param d, represents a day
+     * @param c, represents a class
+     * @return ArrayList<Event>
+     */
     public ArrayList<Event> getAgendaClassEventsOnDate(CalendarDay d, String c) {
         ArrayList<Event> classEvents = getAgendaEventsOnDate(d);
         for (Iterator<Event> iterator = classEvents.iterator(); iterator.hasNext(); ) {
@@ -126,17 +141,37 @@ public class Model extends Observable {
         return classEvents;
     }
 
+    /**
+     * Method that returns all the agenda events on a specific date
+     * @param day
+     * @return
+     */
     public ArrayList<Event> getAgendaEventsOnDate(CalendarDay day) {
         return agendaEvents.get(day);
     }
 
-    public Boolean updateCalendarEvents(Context context){
+    /**
+     * Method that calls the classes used to extract all the activities from the pdf calendar
+     * @param context, represents the context fromm which the method was called
+     * @return boolean, true if sucessfull, false otherwise
+     */
+    public boolean updateCalendarEvents(Context context){
         PDFtoXML task = new PDFtoXML();
         task.execute();
-        calendarEvents = new XMLEventsExtracter().extractEvents(context);
+        try {
+            calendarEvents = new XMLEventsExtracter().extractEvents(context);
+        }catch (Exception e){
+            return false;
+        }
         return true;
     }
 
+    /**
+     * Method that calls ICSEventsExtracter in order to extract all the agenda events
+     * @param a, represents caller activity
+     * @param context, represents the context fromm which the method was called
+     * @return
+     */
     public Boolean updateAgendaEvents(AgendaActivity a, Context context){
         try {
             ICSEventsExtracter task = new ICSEventsExtracter(a);

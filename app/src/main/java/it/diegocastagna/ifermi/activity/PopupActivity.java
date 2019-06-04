@@ -92,7 +92,7 @@ public class PopupActivity extends Activity {
             WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
             getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        layoutParams.dimAmount = 0.75f;
+            layoutParams.dimAmount = 0.75f;
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             getWindow().setAttributes(layoutParams);
         }
