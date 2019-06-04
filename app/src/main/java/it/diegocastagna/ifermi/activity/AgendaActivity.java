@@ -74,6 +74,9 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
 
     }
 
+    /**
+     * Method used to create a Spinner with all the classes
+     */
     public void createSpinner(){
         Spinner dropdown = findViewById(R.id.spinner);
         String[] items = new String[]{"Tutti gli eventi", "1A" , "1ACH" , "1AEL" , "1AIN" , "1AME" , "1B" , "1BEL" , "1BIN" , "1BME" , "1C" , "1CELCH" , "1CIN" , "1CME" , "1D" , "1DIN" , "1DME" , "1E" , "2ACH" , "2AIN" , "2AME" , "2B" , "2BEL" , "2BME" , "2C" , "2CEL" , "2CIN" , "2CME" , "2D" , "2DIN" , "2E" , "2EIN" , "2F" , "3A" , "3AMME" , "3B" , "3BMME" , "3C" , "3CBIOMENE" , "3C BIO" , "3MENE" , "3CCH" , "3D" , "3E" , "3EAU" , "3EELEET" , "3EELE" , "3EET" , "3F" , "3IIN" , "3ITEL" , "4AMME" , "4B" , "4BMME" , "4C" , "4CCHCBIO" , "4CBIO" , "4CCH" , "4D" , "4E" , "4EAU" , "4EELE" , "4EET" , "4IIN" , "4ITEL" , "4MENE" , "5A" , "5B" , "5C" , "5CBIO" , "5C CH" , "5D" , "5E" , "5EAUET" , "5EAU" , "5EET" , "5EELE" , "5IIN", "5ITEL" , "5MENE" , "5MME"};
@@ -86,6 +89,13 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
         dropdown.setOnItemSelectedListener(this);
     }
 
+    /**
+     * Spinner listener
+     * @param parent, represents the spinner
+     * @param v, the View in which it was clicked
+     * @param position, position of the choosen option
+     * @param id, id of the Spinner
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
         if(position!=0){
@@ -107,6 +117,9 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
 
     }
 
+    /**
+     * Method used to decorate the calendar
+     */
     public void decorate(){
         MaterialCalendarView calendarView = findViewById(R.id.calendarView);
         calendarView.setClickable(true);
@@ -118,22 +131,38 @@ public class AgendaActivity extends MainActivity implements AdapterView.OnItemSe
         calendarView.addDecorator(new EventDecorator(0xFFFF0000,dates));
     }
 
-
+    /**
+     * Class that decorates the calendar
+     */
     public class EventDecorator implements DayViewDecorator {
 
         private int color;
         private HashSet<CalendarDay> dates;
 
+        /**
+         * Setter method
+         * @param color, integer representation of the color you want to use
+         * @param dates, Collection of the dates you want to decorate
+         */
         public EventDecorator(int color, Collection<CalendarDay> dates) {
             this.color = color;
             this.dates = new HashSet<>(dates);
         }
 
+        /**
+         * Checks if a specific day should be decorated
+         * @param day
+         * @return true if has to be decorated, false otherwise
+         */
         @Override
         public boolean shouldDecorate(CalendarDay day) {
             return dates.contains(day);
         }
 
+        /**
+         * Decorates the calendar
+         * @param view
+         */
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new DotSpan(5, color));

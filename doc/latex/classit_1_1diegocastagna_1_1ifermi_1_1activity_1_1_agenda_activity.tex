@@ -1,0 +1,86 @@
+\hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity}{}\section{it.\+diegocastagna.\+ifermi.\+activity.\+Agenda\+Activity Class Reference}
+\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity}\index{it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}}
+Inheritance diagram for it.\+diegocastagna.\+ifermi.\+activity.\+Agenda\+Activity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.992882cm]{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_1_1_event_decorator}{Event\+Decorator}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a2f0c4b0175930529c241d38a4172ae36}{create\+Spinner}} ()
+\item 
+void \mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a9236dd89796b6b613091b69a75f606e6}{on\+Item\+Selected}} (Adapter\+View$<$?$>$ parent, View v, int position, long id)
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a51ec0c7927ffe54f9e9b2f2bb3063566}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a51ec0c7927ffe54f9e9b2f2bb3063566}} 
+void {\bfseries on\+Pointer\+Capture\+Changed} (boolean has\+Capture)
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a1a30637bac278c780adec158e00bdcae}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a1a30637bac278c780adec158e00bdcae}} 
+void {\bfseries on\+Nothing\+Selected} (Adapter\+View$<$?$>$ adapter\+View)
+\item 
+void \mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a68a47edf7dd34ed0220f452651d69731}{decorate}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a7cfb528cce7cd6cc51be1903e31b145f}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a7cfb528cce7cd6cc51be1903e31b145f}} 
+\mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1models_1_1_model}{Model}} {\bfseries m\+Model} = \mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1models_1_1_model_a467c28bc69afc493d5bb97a39bea3cbf}{Model.\+get\+Instance}}()
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a1b19525b3340b5ad1fade85833b59a46}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a1b19525b3340b5ad1fade85833b59a46}} 
+Map$<$ Calendar\+Day, Array\+List$<$ \mbox{\hyperlink{classit_1_1diegocastagna_1_1ifermi_1_1utils_1_1_event}{Event}} $>$ $>$ {\bfseries events} = null
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a1be0799ce85e34089f6f65174e9c23a7}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a1be0799ce85e34089f6f65174e9c23a7}} 
+Hash\+Set$<$ Calendar\+Day $>$ {\bfseries dates} = new Hash\+Set$<$Calendar\+Day$>$()
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a379bbfbc66be67f6740ec3deca995e5a}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a379bbfbc66be67f6740ec3deca995e5a}} 
+Boolean {\bfseries loading} = true
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a0ae60399622ecdcf74b3758aa29882d3}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a0ae60399622ecdcf74b3758aa29882d3}} 
+void {\bfseries on\+Create} (Bundle saved\+Instance\+State)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a2f0c4b0175930529c241d38a4172ae36}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a2f0c4b0175930529c241d38a4172ae36}} 
+\index{it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}!createSpinner@{createSpinner}}
+\index{createSpinner@{createSpinner}!it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}}
+\subsubsection{\texorpdfstring{createSpinner()}{createSpinner()}}
+{\footnotesize\ttfamily void it.\+diegocastagna.\+ifermi.\+activity.\+Agenda\+Activity.\+create\+Spinner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method used to create a Spinner with all the classes \mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a68a47edf7dd34ed0220f452651d69731}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a68a47edf7dd34ed0220f452651d69731}} 
+\index{it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}!decorate@{decorate}}
+\index{decorate@{decorate}!it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}}
+\subsubsection{\texorpdfstring{decorate()}{decorate()}}
+{\footnotesize\ttfamily void it.\+diegocastagna.\+ifermi.\+activity.\+Agenda\+Activity.\+decorate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Method used to decorate the calendar \mbox{\Hypertarget{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a9236dd89796b6b613091b69a75f606e6}\label{classit_1_1diegocastagna_1_1ifermi_1_1activity_1_1_agenda_activity_a9236dd89796b6b613091b69a75f606e6}} 
+\index{it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}!onItemSelected@{onItemSelected}}
+\index{onItemSelected@{onItemSelected}!it.diegocastagna.ifermi.activity.AgendaActivity@{it.diegocastagna.ifermi.activity.AgendaActivity}}
+\subsubsection{\texorpdfstring{onItemSelected()}{onItemSelected()}}
+{\footnotesize\ttfamily void it.\+diegocastagna.\+ifermi.\+activity.\+Agenda\+Activity.\+on\+Item\+Selected (\begin{DoxyParamCaption}\item[{Adapter\+View$<$?$>$}]{parent,  }\item[{View}]{v,  }\item[{int}]{position,  }\item[{long}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Spinner listener 
+\begin{DoxyParams}{Parameters}
+{\em parent,represents} & the spinner \\
+\hline
+{\em v,the} & View in which it was clicked \\
+\hline
+{\em position,position} & of the choosen option \\
+\hline
+{\em id,id} & of the Spinner \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/it/diegocastagna/ifermi/activity/Agenda\+Activity.\+java\end{DoxyCompactItemize}

@@ -23,7 +23,7 @@ public class DownloadFileFromURL extends AsyncTask {
     protected Boolean doInBackground(Object[] objects) {
         this.f = (File) objects[0];
         this.urlStr = (String) objects[1];
-
+        System.out.println("downloading");
         try{
             downloadFile(f, urlStr);
             return true;

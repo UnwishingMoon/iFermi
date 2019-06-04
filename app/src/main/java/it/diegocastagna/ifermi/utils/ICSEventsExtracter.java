@@ -24,13 +24,19 @@ import it.diegocastagna.ifermi.R;
 import it.diegocastagna.ifermi.activity.AgendaActivity;
 import it.diegocastagna.ifermi.models.Model;
 import it.diegocastagna.ifermi.network.DownloadFileFromURL;
-
+/**
+* Extracts events from a .ics file written in icalendar format
+* */
 public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<CalendarDay, ArrayList<Event>>> {
 
     public AgendaActivity caller;
 
     private Model mModel = Model.getInstance();
 
+    /**
+     * Class constructor
+     * @param a, represents the caller activity
+     */
     public ICSEventsExtracter(AgendaActivity a) {
         caller = a;
     }
@@ -43,8 +49,8 @@ public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<Calenda
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        /*File f2 = new File(mMdodel.getCacheDir(), "agenda.ics");
-        try {
+        File f2 = new File(mModel.getCacheDir(), "agenda.ics");
+        /*try {
             new DownloadFileFromURL().execute(f2, "https://calendar.google.com/calendar/ical/isfermimantova%40gmail.com/public/basic.ics").get();
         } catch (ExecutionException e) {
             System.out.println("download fallito");
@@ -56,8 +62,13 @@ public class ICSEventsExtracter extends AsyncTask<Context, Integer,  Map<Calenda
         Map<CalendarDay, ArrayList<Event>> events = new HashMap<CalendarDay, ArrayList<Event>>();
         ArrayList<EventWithDate> eventsList = new ArrayList<>();
         ICalendar ical = null;
-        try {
+        /*try {
             ical = Biweekly.parse(contexts[0].getResources().openRawResource(R.raw.agenda)).first();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        try {
+            ical = Biweekly.parse(f2).first();
         } catch (IOException e) {
             e.printStackTrace();
         }

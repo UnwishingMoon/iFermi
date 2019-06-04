@@ -63,21 +63,38 @@ public class CalendarioActivity extends MainActivity {
 
     }
 
+    /**
+     * Class that decorates the calendar
+     */
     public class EventDecorator implements DayViewDecorator {
 
         private int color;
         private HashSet<CalendarDay> dates;
 
+        /**
+         * Setter method
+         * @param color, integer representation of the color you want to use
+         * @param dates, Collection of the dates you want to decorate
+         */
         public EventDecorator(int color, Collection<CalendarDay> dates) {
             this.color = color;
             this.dates = new HashSet<>(dates);
         }
 
+        /**
+         * Checks if a specific day should be decorated
+         * @param day
+         * @return true if has to be decorated, false otherwise
+         */
         @Override
         public boolean shouldDecorate(CalendarDay day) {
             return dates.contains(day);
         }
 
+        /**
+         * Decorates the calendar
+         * @param view
+         */
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new DotSpan(5, color));
