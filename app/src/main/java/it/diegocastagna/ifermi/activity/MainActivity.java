@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mModel = Model.getInstance(); // Model
         mModel.setCacheDir(getCacheDir());
 
-        createViewsNews();
+        createViewsNews(); // Create the news
     }
 
     /**
